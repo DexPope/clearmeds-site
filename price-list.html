@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClearMedsCorp — Wholesale Product Catalog</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0a0a;
+    color: #e0e0e0;
+    padding: 0;
+  }
+
+  .page {
+    max-width: 850px;
+    margin: 0 auto;
+    background: #111;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #0a1628 0%, #0d2847 50%, #0a1628 100%);
+    padding: 50px 50px 40px;
+    border-bottom: 2px solid #00b4d8;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00b4d8, #00e5ff, #00b4d8, transparent);
+  }
+
+  .header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  .header .tagline {
+    font-size: 13px;
+    color: #00b4d8;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .header .doc-title {
+    margin-top: 24px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .header .doc-date {
+    font-size: 13px;
+    color: #8899aa;
+    margin-top: 4px;
+  }
+
+  /* Badges */
+  .badges {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 24px 50px;
+    background: #0d1117;
+    border-bottom: 1px solid #1a2332;
+  }
+
+  .badge {
+    background: linear-gradient(135deg, #0d2847, #112d4e);
+    border: 1px solid #1a3a5c;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #00b4d8;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* Section */
+  .section {
+    padding: 30px 50px;
+  }
+
+  .section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #00b4d8;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #1a2332;
+  }
+
+  /* Product rows */
+  .product-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .product-table thead th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    color: #667788;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px 12px;
+    border-bottom: 1px solid #1a2332;
+  }
+
+  .product-table thead th:last-child {
+    text-align: right;
+  }
+
+  .product-table tbody tr {
+    border-bottom: 1px solid #141c26;
+    transition: background 0.2s;
+  }
+
+  .product-table tbody tr:hover {
+    background: #0d1a2a;
+  }
+
+  .product-table td {
+    padding: 14px 12px;
+    font-size: 14px;
+  }
+
+  .product-table td:first-child {
+    font-weight: 500;
+    color: #fff;
+  }
+
+  .product-table td:nth-child(2) {
+    color: #8899aa;
+    font-size: 13px;
+  }
+
+  .product-table td:last-child {
+    text-align: right;
+    font-weight: 700;
+    color: #00e5ff;
+    font-size: 16px;
+    white-space: nowrap;
+  }
+
+  .category-row td {
+    background: #0a1628;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    color: #00b4d8 !important;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 16px 12px 8px !important;
+    border-bottom: 1px solid #1a3a5c !important;
+  }
+
+  .highlight-row {
+    background: linear-gradient(90deg, rgba(0,180,216,0.05), transparent);
+  }
+
+  .highlight-row td:first-child {
+    color: #00e5ff;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-left: 8px;
+    vertical-align: middle;
+    letter-spacing: 0.5px;
+  }
+
+  .tag-hot {
+    background: #ff4444;
+    color: #fff;
+  }
+
+  .tag-popular {
+    background: #00b4d8;
+    color: #000;
+  }
+
+  .tag-new {
+    background: #00c853;
+    color: #000;
+  }
+
+  .tag-moq {
+    background: #ff9800;
+    color: #000;
+  }
+
+  /* Notes */
+  .notes {
+    padding: 30px 50px;
+    background: #0d1117;
+    border-top: 1px solid #1a2332;
+  }
+
+  .notes h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #00b4d8;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  .notes ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .notes li {
+    padding: 8px 0;
+    font-size: 13px;
+    color: #8899aa;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .notes li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #00b4d8;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 40px 50px;
+    background: linear-gradient(135deg, #0a1628 0%, #0d2847 100%);
+    border-top: 2px solid #00b4d8;
+    text-align: center;
+  }
+
+  .footer .contact-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .footer .contact-title {
+    font-size: 13px;
+    color: #00b4d8;
+    margin-bottom: 20px;
+  }
+
+  .footer .contact-info {
+    font-size: 14px;
+    color: #8899aa;
+    line-height: 2;
+  }
+
+  .footer .contact-info a {
+    color: #00e5ff;
+    text-decoration: none;
+  }
+
+  .footer .website {
+    margin-top: 16px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .footer .website a {
+    color: #00e5ff;
+    text-decoration: none;
+    letter-spacing: 1px;
+  }
+
+  .footer .disclaimer {
+    margin-top: 24px;
+    font-size: 11px;
+    color: #445566;
+    line-height: 1.6;
+  }
+
+  /* Print styles */
+  @media print {
+    body { background: #fff; color: #111; }
+    .page { background: #fff; }
+    .header { background: #f8f9fa; border-bottom: 2px solid #0066cc; }
+    .header::after { background: #0066cc; }
+    .header h1 { color: #111; }
+    .header .tagline { color: #0066cc; }
+    .header .doc-title { color: #111; }
+    .badges { background: #f8f9fa; }
+    .badge { background: #e8f4f8; border-color: #cce; color: #0066cc; }
+    .section-title { color: #0066cc; border-color: #ddd; }
+    .product-table thead th { color: #666; border-color: #ddd; }
+    .product-table tbody tr { border-color: #eee; }
+    .product-table td:first-child { color: #111; }
+    .product-table td:last-child { color: #0066cc; }
+    .category-row td { background: #f0f4f8; color: #0066cc !important; }
+    .notes { background: #f8f9fa; }
+    .notes li { color: #444; }
+    .footer { background: #f0f4f8; border-color: #0066cc; }
+    .footer .contact-name { color: #111; }
+    .footer .contact-info { color: #444; }
+    .footer .contact-info a, .footer .website a { color: #0066cc; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>CLEARMEDS<span style="color:#00b4d8">CORP</span></h1>
+    <div class="tagline">cGMP-Certified Peptide Manufacturer</div>
+    <div class="doc-title">Wholesale Product Catalog & Price List</div>
+    <div class="doc-date">February 2026 — Clinic & Practitioner Pricing</div>
+  </div>
+
+  <!-- Badges -->
+  <div class="badges">
+    <div class="badge">✓ cGMP Certified</div>
+    <div class="badge">✓ Commercial Drug Mfg License</div>
+    <div class="badge">✓ 16+ Years Manufacturing</div>
+    <div class="badge">✓ Pre-Reconstituted</div>
+    <div class="badge">✓ No Refrigeration Required</div>
+    <div class="badge">✓ 15-Month Shelf Life</div>
+  </div>
+
+  <!-- Products -->
+  <div class="section">
+    <div class="section-title">Product Catalog</div>
+
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Details</th>
+          <th>Per Unit</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- Weight Loss / Metabolic -->
+        <tr class="category-row"><td colspan="3">🔥 Weight Loss & Metabolic</td></tr>
+
+        <tr class="highlight-row">
+          <td>Burn Blend <span class="tag tag-hot">HOT</span></td>
+          <td>Reta 15mg / Tirz 5mg</td>
+          <td>$400</td>
+        </tr>
+        <tr>
+          <td>Retatrutide</td>
+          <td>18mg</td>
+          <td>$300</td>
+        </tr>
+        <tr>
+          <td>Tirzepatide</td>
+          <td>20mg</td>
+          <td>$200</td>
+        </tr>
+        <tr>
+          <td>MOTS-C</td>
+          <td>10mg — mitochondrial peptide</td>
+          <td>$60</td>
+        </tr>
+
+        <!-- Growth & Recovery -->
+        <tr class="category-row"><td colspan="3">💪 Growth Factors & Recovery</td></tr>
+
+        <tr>
+          <td>Follistatin (FST-344)</td>
+          <td>1mg</td>
+          <td>$150</td>
+        </tr>
+        <tr>
+          <td>CJC-1295 w/DAC</td>
+          <td>5mg</td>
+          <td>$90</td>
+        </tr>
+        <tr>
+          <td>IGF1-LR3</td>
+          <td></td>
+          <td>$100</td>
+        </tr>
+        <tr>
+          <td>2X Blend</td>
+          <td>CJC / Ipamorelin 5/5mg</td>
+          <td>$80</td>
+        </tr>
+        <tr>
+          <td>3X Blend</td>
+          <td>Tesa 5mg / MGF 500mcg / Ipamorelin 2.5mg</td>
+          <td>$80</td>
+        </tr>
+        <tr>
+          <td>4X Blend</td>
+          <td>G2 1.6mg / Ipa 1.2mg / Tesa 1.6mg / P-MGF 1mg</td>
+          <td>$80</td>
+        </tr>
+
+        <!-- Healing & Repair -->
+        <tr class="category-row"><td colspan="3">🩹 Healing & Repair</td></tr>
+
+        <tr class="highlight-row">
+          <td>Wolverine <span class="tag tag-popular">POPULAR</span></td>
+          <td>BPC-157 10mg / Thymosin Beta 4 10mg</td>
+          <td>$120</td>
+        </tr>
+        <tr>
+          <td>Klow</td>
+          <td>GHK 50mg / BPC 10mg / TB4 10mg / KPV 10mg</td>
+          <td>$150</td>
+        </tr>
+        <tr>
+          <td>Glow</td>
+          <td>GHK 50mg / BPC 10mg / TB4 10mg</td>
+          <td>$100</td>
+        </tr>
+        <tr>
+          <td>BPC Mod</td>
+          <td>BPC-157 10mg / TB4 2.5mg / KPV 2mg / P-MGF 1mg</td>
+          <td>$100</td>
+        </tr>
+        <tr>
+          <td>GI Mod</td>
+          <td>Gastrointestinal support blend</td>
+          <td>$60</td>
+        </tr>
+
+        <!-- Longevity & Anti-Aging -->
+        <tr class="category-row"><td colspan="3">🧬 Longevity & Anti-Aging</td></tr>
+
+        <tr>
+          <td>NAD+</td>
+          <td>1000mg</td>
+          <td>$100</td>
+        </tr>
+        <tr>
+          <td>Epithalon</td>
+          <td>50mg — telomere support</td>
+          <td>$100</td>
+        </tr>
+        <tr>
+          <td>SS-31</td>
+          <td>50mg / 1ml (wet)</td>
+          <td>$120</td>
+        </tr>
+        <tr>
+          <td>Melanotan 2</td>
+          <td>10mg</td>
+          <td>$40</td>
+        </tr>
+
+        <!-- Immune & Thymic -->
+        <tr class="category-row"><td colspan="3">🛡️ Immune & Thymic Support</td></tr>
+
+        <tr>
+          <td>Thymosin Alpha 1 Mod</td>
+          <td>TA1 3.2mg / Thymalin 2.5mg / Ursolic Acid 5mg / RG3 Ginsenoside 25mg / AMPK Activator</td>
+          <td>$100</td>
+        </tr>
+
+        <!-- Cognitive & Neuro -->
+        <tr class="category-row"><td colspan="3">🧠 Cognitive & Neuroprotection</td></tr>
+
+        <tr>
+          <td>BDNF</td>
+          <td>10mg — brain-derived neurotrophic factor</td>
+          <td>$70</td>
+        </tr>
+        <tr>
+          <td>Semax</td>
+          <td>20mg</td>
+          <td>$70</td>
+        </tr>
+        <tr>
+          <td>Selank</td>
+          <td>20mg</td>
+          <td>$70</td>
+        </tr>
+
+        <!-- Topical -->
+        <tr class="category-row"><td colspan="3">✨ Topical & Skin</td></tr>
+
+        <tr>
+          <td>Topical GHK-Cu</td>
+          <td>15ml — copper peptide serum</td>
+          <td>$100</td>
+        </tr>
+        <tr>
+          <td>GHK-Cu</td>
+          <td>50mg — injectable</td>
+          <td>$60</td>
+        </tr>
+
+        <!-- IV Grade -->
+        <tr class="category-row"><td colspan="3">💉 IV-Grade Injectables</td></tr>
+
+        <tr>
+          <td>Glutathione (IV Grade) <span class="tag tag-moq">MOQ 50</span></td>
+          <td>30ml / 200mg per ml</td>
+          <td>$90</td>
+        </tr>
+        <tr>
+          <td>B-12 (IV Grade) <span class="tag tag-moq">MOQ 50</span></td>
+          <td>30ml / 10mg per 1ml</td>
+          <td>$90</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Notes -->
+  <div class="notes">
+    <h3>Why ClearMedsCorp</h3>
+    <ul>
+      <li><strong>Not a compounding pharmacy</strong> — we are a licensed cGMP manufacturer. FDA compounding restrictions do not affect our supply chain.</li>
+      <li><strong>Proprietary inclusion complex</strong> — all products are pre-reconstituted and ready to administer. No bac water, no mixing, no titration errors.</li>
+      <li><strong>No refrigeration required</strong> — molecular stability via our proprietary process. Ship and store at room temperature.</li>
+      <li><strong>15-month shelf life</strong> — longer than any compounded alternative.</li>
+      <li><strong>Not light-sensitive</strong> — no special storage requirements.</li>
+      <li><strong>Volume discounts available</strong> — contact us for custom pricing on larger orders.</li>
+      <li><strong>IV-Grade Glutathione & B-12</strong> — minimum order quantity of 50 units.</li>
+      <li>All products manufactured under commercial drug manufacturing license with 16+ years of operational history.</li>
+    </ul>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="contact-name">Chayse Winter</div>
+    <div class="contact-title">Founder & CEO — ClearMedsCorp</div>
+    <div class="contact-info">
+      📞 <a href="tel:+17132809876">(713) 280-9876</a><br>
+      ✉️ <a href="mailto:sales@clearmeds.bio">sales@clearmeds.bio</a>
+    </div>
+    <div class="website">
+      <a href="https://www.clearmeds.bio">www.clearmeds.bio</a>
+    </div>
+    <div class="disclaimer">
+      For licensed healthcare practitioners and authorized purchasers only. All products are for research or clinical use under appropriate medical supervision. Pricing subject to change. Volume discounts available upon request. © 2026 ClearMedsCorp, a division of August Aisles LLC.
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
