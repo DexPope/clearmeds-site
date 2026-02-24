@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ClearMeds Corp — Letter to Medical Director</title>
+<style>
+  @page { size: letter; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 11.5pt;
+    line-height: 1.55;
+    color: #1a1a1a;
+    background: #fff;
+    padding: 0.75in 1in 0.75in 1in;
+    max-width: 8.5in;
+    min-height: 11in;
+  }
+
+  /* --- Letterhead --- */
+  .letterhead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2.5px solid #0b3d6b;
+    padding-bottom: 14px;
+    margin-bottom: 28px;
+  }
+  .letterhead-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .logo-placeholder {
+    width: 52px; height: 52px;
+    border: 2px solid #0b3d6b;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8pt; color: #0b3d6b; text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  .company-name {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20pt;
+    font-weight: 700;
+    color: #0b3d6b;
+    letter-spacing: 0.5px;
+  }
+  .company-tagline {
+    font-family: Arial, sans-serif;
+    font-size: 8pt;
+    color: #555;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .letterhead-right {
+    text-align: right;
+    font-family: Arial, sans-serif;
+    font-size: 8.5pt;
+    color: #444;
+    line-height: 1.5;
+  }
+  .letterhead-right a { color: #0b3d6b; text-decoration: none; }
+
+  /* --- Body --- */
+  .date { margin-bottom: 22px; font-size: 10.5pt; color: #444; }
+  .salutation { margin-bottom: 14px; }
+  .body p { margin-bottom: 12px; text-align: justify; }
+  .body ul {
+    margin: 8px 0 14px 22px;
+    list-style: none;
+  }
+  .body ul li {
+    position: relative;
+    padding-left: 16px;
+    margin-bottom: 5px;
+  }
+  .body ul li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #0b3d6b;
+    font-weight: bold;
+  }
+  .closing { margin-top: 24px; }
+  .signature-block { margin-top: 36px; }
+  .sig-name { font-weight: bold; font-size: 12pt; }
+  .sig-title { font-size: 10pt; color: #444; }
+
+  /* --- QR / Footer --- */
+  .qr-section {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-top: 1px solid #ccc;
+    padding-top: 16px;
+  }
+  .qr-box {
+    width: 80px; height: 80px;
+    border: 1.5px solid #0b3d6b;
+    display: flex; align-items: center; justify-content: center;
+    font-family: Arial, sans-serif;
+    font-size: 7pt; color: #0b3d6b; text-align: center;
+    flex-shrink: 0;
+  }
+  .qr-text {
+    font-family: Arial, sans-serif;
+    font-size: 9pt;
+    color: #555;
+    line-height: 1.5;
+  }
+  .qr-text strong { color: #0b3d6b; }
+
+  /* --- Print --- */
+  @media print {
+    body { padding: 0.75in 1in; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LETTERHEAD -->
+<div class="letterhead">
+  <div class="letterhead-left">
+    <div class="logo-placeholder">CLEAR<br>MEDS</div>
+    <div>
+      <div class="company-name">ClearMeds Corp</div>
+      <div class="company-tagline">Commercial Drug Manufacturer · Est. 2009</div>
+    </div>
+  </div>
+  <div class="letterhead-right">
+    August Aisles LLC<br>
+    Houston, TX<br>
+    <strong>(713) 280-9876</strong><br>
+    <a href="https://clearmeds.bio">clearmeds.bio</a>
+  </div>
+</div>
+
+<!-- DATE -->
+<div class="date">[DATE]</div>
+
+<!-- SALUTATION -->
+<div class="salutation">Dear Medical Director,</div>
+
+<!-- BODY -->
+<div class="body">
+
+<p>I hope this letter finds you well. I'm reaching out because recent FDA enforcement actions against compounding pharmacies have created significant supply disruptions for clinics that depend on peptide therapies — and I want you to know there is a stable, compliant alternative.</p>
+
+<p><strong>ClearMeds Corp is a licensed commercial drug manufacturer — not a compounder.</strong> The current regulatory crackdown on 503A and 503B compounding pharmacies does not affect our operations. We hold a commercial drug manufacturing license and have been producing pharmaceutical products under cGMP standards for over sixteen years.</p>
+
+<p>What that means for your practice:</p>
+
+<ul>
+  <li><strong>Uninterrupted supply</strong> — no exposure to compounding pharmacy shutdowns or FDA warning letters</li>
+  <li><strong>cGMP-certified manufacturing</strong> — the same standard required of major pharmaceutical companies</li>
+  <li><strong>Proprietary inclusion complex technology</strong> — pre-reconstituted formulations that require no refrigeration and carry a 15-month shelf life</li>
+  <li><strong>Low minimum order</strong> — just 50 units per SKU, designed for clinic-level purchasing</li>
+  <li><strong>Full product range</strong> — GLP-1 agonists, tissue repair peptides, sexual health, cognitive support, anti-aging, and more</li>
+</ul>
+
+<p>Our pre-reconstituted format eliminates the mixing, refrigeration, and short shelf-life headaches associated with traditional lyophilized peptides. Your staff saves time, and your patients receive a consistent, ready-to-use product every time.</p>
+
+<p>I've enclosed a product and pricing overview for your review. I'd welcome the opportunity to discuss how ClearMeds can provide your clinic with a reliable, regulation-proof peptide supply.</p>
+
+<p><strong>For qualifying bulk partnerships, we offer a complimentary visit to our cGMP-certified manufacturing facility in California</strong> — including airfare, a full facility tour, and a face-to-face meeting with our production team. We believe that seeing our operation firsthand is the best way to earn your trust and build a lasting partnership.</p>
+
+</div>
+
+<!-- CLOSING -->
+<div class="closing">
+  <p>Please don't hesitate to call me directly at <strong>(713) 280-9876</strong> or visit <strong>clearmeds.bio</strong> for full product details. I look forward to hearing from you.</p>
+</div>
+
+<div class="signature-block">
+  <p>Warm regards,</p>
+  <br>
+  <p class="sig-name">Chayse Winter</p>
+  <p class="sig-title">Sales Director, ClearMeds Corp</p>
+  <p class="sig-title">(713) 280-9876 · clearmeds.bio</p>
+</div>
+
+<!-- QR CODE -->
+<div class="qr-section">
+  <div class="qr-box">[QR CODE:<br>clearmeds.bio/<br>price-list.html]</div>
+  <div class="qr-text">
+    <strong>Scan for full product catalog &amp; pricing</strong><br>
+    Or visit clearmeds.bio/price-list.html
+  </div>
+</div>
+
+</body>
+</html>

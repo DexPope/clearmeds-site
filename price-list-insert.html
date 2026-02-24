@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ClearMeds Corp — Product &amp; Pricing Overview</title>
+<style>
+  @page { size: letter; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9.5pt;
+    color: #1a1a1a;
+    background: #fff;
+    padding: 0.6in 0.75in 0.5in 0.75in;
+    max-width: 8.5in;
+    min-height: 11in;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    border-bottom: 2.5px solid #0b3d6b;
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-size: 18pt;
+    color: #0b3d6b;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+  .header .subtitle {
+    font-size: 10pt;
+    color: #555;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .header .tagline {
+    margin-top: 6px;
+    font-size: 8.5pt;
+    color: #777;
+  }
+
+  /* Highlight bar */
+  .highlight-bar {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 16px;
+    font-size: 8.5pt;
+    color: #0b3d6b;
+    font-weight: 600;
+  }
+  .highlight-bar span::before {
+    content: "●  ";
+    font-size: 6pt;
+    vertical-align: middle;
+  }
+
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+  }
+  thead th {
+    background: #0b3d6b;
+    color: #fff;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 6px 8px;
+    text-align: left;
+  }
+  thead th:last-child { text-align: right; }
+  tbody td {
+    padding: 5px 8px;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: top;
+  }
+  tbody td:last-child {
+    text-align: right;
+    white-space: nowrap;
+    font-weight: 600;
+  }
+  tbody tr:nth-child(even) td { background: #f7f9fb; }
+  .category-row td {
+    background: #eaf0f7 !important;
+    font-weight: 700;
+    font-size: 9pt;
+    color: #0b3d6b;
+    padding-top: 8px;
+    border-bottom: 1.5px solid #0b3d6b;
+  }
+  .star { color: #0b3d6b; font-weight: 700; }
+  .badge {
+    display: inline-block;
+    font-size: 7pt;
+    background: #0b3d6b;
+    color: #fff;
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin-left: 5px;
+    vertical-align: middle;
+    letter-spacing: 0.3px;
+  }
+  .note {
+    font-size: 8pt;
+    color: #666;
+  }
+
+  /* Bottom section */
+  .bottom {
+    margin-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .terms {
+    font-size: 8pt;
+    color: #555;
+    line-height: 1.6;
+    max-width: 60%;
+  }
+  .terms strong { color: #0b3d6b; }
+  .cta {
+    text-align: right;
+    font-size: 9pt;
+    line-height: 1.6;
+  }
+  .cta .phone {
+    font-size: 14pt;
+    font-weight: 700;
+    color: #0b3d6b;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 16px;
+    border-top: 1.5px solid #0b3d6b;
+    padding-top: 8px;
+    text-align: center;
+    font-size: 8pt;
+    color: #777;
+  }
+  .footer strong { color: #0b3d6b; }
+
+  @media print {
+    body { padding: 0.6in 0.75in 0.5in 0.75in; }
+    thead th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .category-row td, tbody tr:nth-child(even) td { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>ClearMeds Corp</h1>
+  <div class="subtitle">Product &amp; Pricing Overview</div>
+  <div class="tagline">Licensed Commercial Drug Manufacturer · cGMP Certified · 16+ Years</div>
+</div>
+
+<div class="highlight-bar">
+  <span>Pre-Reconstituted — No Mixing</span>
+  <span>No Refrigeration Required</span>
+  <span>15-Month Shelf Life</span>
+  <span>MOQ 50 Units</span>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Format / Notes</th>
+      <th>Per Unit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- GLP-1 -->
+    <tr class="category-row"><td colspan="3">GLP-1 / Weight Loss</td></tr>
+    <tr><td class="star">Semaglutide <span class="badge">TOP SELLER</span></td><td>Pre-reconstituted vial · multiple strengths</td><td>Contact</td></tr>
+    <tr><td class="star">Tirzepatide <span class="badge">TOP SELLER</span></td><td>Pre-reconstituted vial · multiple strengths</td><td>Contact</td></tr>
+
+    <!-- Tissue Repair -->
+    <tr class="category-row"><td colspan="3">Tissue Repair &amp; Recovery</td></tr>
+    <tr><td class="star">BPC-157 <span class="badge">TOP SELLER</span></td><td>Pre-reconstituted vial</td><td>Contact</td></tr>
+    <tr><td class="star">TB-500 <span class="badge">TOP SELLER</span></td><td>Pre-reconstituted vial</td><td>Contact</td></tr>
+
+    <!-- Sexual Health -->
+    <tr class="category-row"><td colspan="3">Sexual Health</td></tr>
+    <tr><td class="star">PT-141 (Bremelanotide) <span class="badge">TOP SELLER</span></td><td>Pre-reconstituted vial</td><td>Contact</td></tr>
+
+    <!-- Cognitive -->
+    <tr class="category-row"><td colspan="3">Cognitive Enhancement</td></tr>
+    <tr><td>Selank</td><td>Pre-reconstituted vial</td><td>Contact</td></tr>
+    <tr><td>Semax</td><td>Pre-reconstituted vial</td><td>Contact</td></tr>
+
+    <!-- Anti-Aging -->
+    <tr class="category-row"><td colspan="3">Anti-Aging</td></tr>
+    <tr><td>Epithalon</td><td>Pre-reconstituted vial</td><td>Contact</td></tr>
+    <tr><td>NAD+ Precursors</td><td>Oral / injectable formats</td><td>Contact</td></tr>
+
+    <!-- Hair/Skin -->
+    <tr class="category-row"><td colspan="3">Hair &amp; Skin</td></tr>
+    <tr><td class="star">GHK-Cu <span class="badge">TOP SELLER</span></td><td>Topical formulation</td><td>Contact</td></tr>
+    <tr><td>Copper Peptides</td><td>Topical</td><td>Contact</td></tr>
+
+    <!-- Immune -->
+    <tr class="category-row"><td colspan="3">Immune Support</td></tr>
+    <tr><td>Thymosin Alpha-1</td><td>Pre-reconstituted vial</td><td>Contact</td></tr>
+
+    <!-- Custom -->
+    <tr class="category-row"><td colspan="3">Custom Formulations</td></tr>
+    <tr><td colspan="2" class="note">Custom blends and private-label available. Contact us to discuss your clinic's needs.</td><td>Contact</td></tr>
+  </tbody>
+</table>
+
+<div class="bottom">
+  <div class="terms">
+    <strong>Ordering &amp; Terms</strong><br>
+    Minimum order: <strong>50 units per SKU</strong><br>
+    Volume discounts available at 100, 250, and 500+ units<br>
+    White-label and private-label options available<br>
+    All products manufactured under cGMP in the USA<br>
+    Contact for current pricing and availability
+  </div>
+  <div class="cta">
+    Ready to order?<br>
+    <div class="phone">(713) 280-9876</div>
+    <strong>clearmeds.bio</strong><br>
+    sales@clearmeds.bio
+  </div>
+</div>
+
+<div class="footer">
+  <strong>ClearMeds Corp</strong> · August Aisles LLC · Houston, TX &nbsp;|&nbsp;
+  <strong>clearmeds.bio</strong> &nbsp;|&nbsp;
+  (713) 280-9876 &nbsp;|&nbsp;
+  sales@clearmeds.bio
+</div>
+
+</body>
+</html>
