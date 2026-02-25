@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClearMedsCorp — Wholesale Peptides for Clinics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --blue-900: #0a1628;
+  --blue-800: #0f2240;
+  --blue-700: #143566;
+  --blue-600: #1a4d8f;
+  --blue-500: #2563eb;
+  --blue-400: #4f8af7;
+  --blue-100: #dbeafe;
+  --blue-50: #eff6ff;
+  --white: #ffffff;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+  --green-500: #22c55e;
+  --green-100: #dcfce7;
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 24px rgba(0,0,0,.04);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,.1), 0 16px 48px rgba(0,0,0,.08);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--gray-800); line-height: 1.6; background: var(--white); -webkit-font-smoothing: antialiased; }
+
+/* ---- NAV ---- */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--gray-200);
+  transition: box-shadow .3s;
+}
+nav.scrolled { box-shadow: var(--shadow); }
+.nav-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between; height: 72px;
+}
+.logo { font-weight: 800; font-size: 1.25rem; color: var(--blue-900); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.logo-icon { width: 36px; height: 36px; background: var(--blue-500); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.logo-icon svg { width: 20px; height: 20px; fill: white; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { text-decoration: none; color: var(--gray-600); font-size: .9rem; font-weight: 500; transition: color .2s; }
+.nav-links a:hover { color: var(--blue-500); }
+.nav-cta { background: var(--blue-500); color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: .9rem; transition: background .2s; }
+.nav-cta:hover { background: var(--blue-600); }
+.mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.mobile-toggle span { display: block; width: 24px; height: 2px; background: var(--gray-700); margin: 5px 0; transition: .3s; border-radius: 2px; }
+
+/* ---- HERO ---- */
+.hero {
+  padding: 160px 24px 100px;
+  background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 40%, var(--blue-700) 100%);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -50%; right: -20%; width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(37,99,235,.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -30%; left: -10%; width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(79,138,247,.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15);
+  padding: 8px 16px; border-radius: 100px; font-size: .8rem; color: var(--blue-100);
+  font-weight: 500; margin-bottom: 24px; backdrop-filter: blur(4px);
+}
+.hero-badge .dot { width: 8px; height: 8px; background: var(--green-500); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
+.hero h1 { font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 800; color: var(--white); line-height: 1.15; max-width: 720px; margin-bottom: 20px; letter-spacing: -.02em; }
+.hero h1 span { background: linear-gradient(135deg, var(--blue-400), #93c5fd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p { font-size: 1.2rem; color: var(--blue-100); max-width: 560px; margin-bottom: 36px; opacity: .85; }
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--blue-500); color: white; padding: 16px 32px; border-radius: 10px;
+  text-decoration: none; font-weight: 600; font-size: 1rem; border: none; cursor: pointer;
+  transition: all .2s; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(37,99,235,.3); }
+.btn-secondary {
+  background: rgba(255,255,255,.1); color: white; padding: 16px 32px; border-radius: 10px;
+  text-decoration: none; font-weight: 600; font-size: 1rem; border: 1px solid rgba(255,255,255,.2);
+  transition: all .2s; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-secondary:hover { background: rgba(255,255,255,.18); }
+.hero-stats { display: flex; gap: 48px; margin-top: 64px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,.1); }
+.hero-stat h3 { font-size: 2rem; font-weight: 800; color: white; }
+.hero-stat p { font-size: .85rem; color: var(--blue-100); opacity: .7; margin-top: 2px; }
+
+/* ---- TRUST BAR ---- */
+.trust-bar { background: var(--gray-50); border-bottom: 1px solid var(--gray-200); padding: 24px; }
+.trust-bar-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; }
+.trust-item { display: flex; align-items: center; gap: 10px; color: var(--gray-500); font-size: .85rem; font-weight: 500; }
+.trust-item svg { width: 20px; height: 20px; fill: var(--blue-500); flex-shrink: 0; }
+
+/* ---- SECTIONS ---- */
+.section { padding: 100px 24px; }
+.section-dark { background: var(--blue-900); color: white; }
+.section-gray { background: var(--gray-50); }
+.container { max-width: 1200px; margin: 0 auto; }
+.section-header { text-align: center; max-width: 640px; margin: 0 auto 64px; }
+.section-label { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--blue-500); margin-bottom: 12px; }
+.section-dark .section-label { color: var(--blue-400); }
+.section-header h2 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; letter-spacing: -.02em; margin-bottom: 16px; }
+.section-header p { color: var(--gray-500); font-size: 1.1rem; }
+.section-dark .section-header p { color: rgba(255,255,255,.6); }
+
+/* ---- VALUE PROPS ---- */
+.value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.value-card {
+  background: white; border: 1px solid var(--gray-200); border-radius: var(--radius);
+  padding: 36px; transition: all .25s;
+}
+.value-card:hover { border-color: var(--blue-500); box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+.value-icon {
+  width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px; background: var(--blue-50);
+}
+.value-icon svg { width: 24px; height: 24px; fill: var(--blue-500); }
+.value-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+.value-card p { color: var(--gray-500); font-size: .95rem; line-height: 1.6; }
+
+/* ---- PRODUCTS ---- */
+.product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.product-card {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--radius); padding: 40px; transition: all .25s; position: relative; overflow: hidden;
+}
+.product-card:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.15); transform: translateY(-2px); }
+.product-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--blue-500), var(--blue-400));
+  opacity: 0; transition: opacity .25s;
+}
+.product-card:hover::before { opacity: 1; }
+.product-emoji { font-size: 2.5rem; margin-bottom: 16px; display: block; }
+.product-card h3 { font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 8px; }
+.product-card p { color: rgba(255,255,255,.55); font-size: .95rem; margin-bottom: 20px; }
+.product-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.product-tag {
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.1);
+  padding: 4px 12px; border-radius: 100px; font-size: .78rem; color: rgba(255,255,255,.6);
+}
+
+/* ---- WHY US ---- */
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.why-list { display: flex; flex-direction: column; gap: 28px; }
+.why-item { display: flex; gap: 16px; }
+.why-check {
+  width: 28px; height: 28px; border-radius: 50%; background: var(--green-100);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
+}
+.why-check svg { width: 14px; height: 14px; fill: #16a34a; }
+.why-item h4 { font-weight: 700; margin-bottom: 4px; }
+.why-item p { color: var(--gray-500); font-size: .9rem; }
+.why-stats-card {
+  background: linear-gradient(135deg, var(--blue-900), var(--blue-800));
+  border-radius: 16px; padding: 48px; color: white;
+}
+.why-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.why-stat { text-align: center; }
+.why-stat h3 { font-size: 2.5rem; font-weight: 800; margin-bottom: 4px; }
+.why-stat p { font-size: .85rem; opacity: .6; }
+
+/* ---- CTA ---- */
+.cta-section {
+  padding: 80px 24px;
+  background: linear-gradient(135deg, var(--blue-500), var(--blue-600));
+  text-align: center; color: white;
+}
+.cta-section h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 800; margin-bottom: 12px; }
+.cta-section p { opacity: .85; margin-bottom: 32px; font-size: 1.1rem; }
+
+/* ---- CONTACT ---- */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.contact-info h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; }
+.contact-info > p { color: var(--gray-500); margin-bottom: 32px; }
+.contact-detail { display: flex; gap: 12px; margin-bottom: 20px; align-items: flex-start; }
+.contact-detail svg { width: 20px; height: 20px; fill: var(--blue-500); flex-shrink: 0; margin-top: 2px; }
+.contact-detail strong { display: block; font-size: .85rem; margin-bottom: 2px; }
+.contact-detail span { color: var(--gray-500); font-size: .9rem; }
+
+.form-card { background: white; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 40px; box-shadow: var(--shadow); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: 6px; color: var(--gray-700); }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 12px 16px; border: 1px solid var(--gray-200); border-radius: 8px;
+  font-size: .95rem; font-family: inherit; color: var(--gray-800); transition: border-color .2s;
+  background: var(--gray-50);
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  outline: none; border-color: var(--blue-500); background: white; box-shadow: 0 0 0 3px rgba(37,99,235,.1);
+}
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-submit {
+  width: 100%; padding: 14px; background: var(--blue-500); color: white; border: none;
+  border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background .2s;
+  font-family: inherit;
+}
+.form-submit:hover { background: var(--blue-600); }
+
+/* ---- FOOTER ---- */
+footer {
+  background: var(--blue-900); color: rgba(255,255,255,.5); padding: 48px 24px;
+  font-size: .85rem; border-top: 1px solid rgba(255,255,255,.05);
+}
+.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: white; }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 1024px) {
+  .value-grid { grid-template-columns: repeat(2, 1fr); }
+  .why-grid, .contact-grid { grid-template-columns: 1fr; }
+  .why-stats-card { order: -1; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .mobile-toggle { display: block; }
+  .value-grid, .product-grid { grid-template-columns: 1fr; }
+  .hero-stats { flex-direction: column; gap: 24px; }
+  .form-row { grid-template-columns: 1fr; }
+  .hero { padding: 130px 24px 80px; }
+  .section { padding: 72px 24px; }
+  .trust-bar-inner { gap: 24px; }
+}
+@media (max-width: 480px) {
+  .hero-actions { flex-direction: column; }
+  .btn-primary, .btn-secondary { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <img src="logo.png" alt="ClearMeds Logo" style="height: 40px; border-radius: 6px;">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#products">Products</a></li>
+      <li><a href="#why-us">Why Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Request Pricing</a>
+    <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="dot"></span> Now accepting new wholesale accounts</div>
+    <h1>Wholesale Peptides for <span>Modern Clinics</span></h1>
+    <p>Premium-grade, USA-manufactured peptides with verified purity — at wholesale prices built for your practice's bottom line.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Get Wholesale Pricing →</a>
+      <a href="#products" class="btn-secondary">View Product Catalog</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><h3>99.5%+</h3><p>Purity Verified</p></div>
+      <div class="hero-stat"><h3>500+</h3><p>Clinics Served</p></div>
+      <div class="hero-stat"><h3>48hr</h3><p>Average Ship Time</p></div>
+      <div class="hero-stat"><h3>100%</h3><p>Made in USA</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+      Third-Party Purity Tested
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      Manufactured in the USA
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+      Fast 48-Hour Shipping
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+      Certificate of Analysis Included
+    </div>
+  </div>
+</div>
+
+<!-- VALUE PROPS -->
+<section class="section" id="value">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Why Partner With Us</div>
+      <h2>Built for Clinics, Priced for Growth</h2>
+      <p>Everything your practice needs from a peptide supplier — quality, speed, and pricing that protects your margins.</p>
+    </div>
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+        </div>
+        <h3>Wholesale Pricing</h3>
+        <p>Competitive tiered pricing designed for clinics. The more you order, the more you save — with margins that make sense for your practice.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+        </div>
+        <h3>Verified Purity Testing</h3>
+        <p>Every batch undergoes third-party HPLC and mass spectrometry testing. Full Certificate of Analysis provided with each order.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </div>
+        <h3>Made in USA</h3>
+        <p>All peptides synthesized in our US-based facility under strict GMP-aligned protocols. No overseas sourcing, no surprises.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+        </div>
+        <h3>Fast Shipping</h3>
+        <p>Orders ship within 48 hours via temperature-controlled packaging. Priority and overnight options available for urgent needs.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24"><path d="M19.36 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.64-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+        </div>
+        <h3>Custom Formulations</h3>
+        <p>Need a specific peptide blend or concentration? Our team works with you to develop custom formulations tailored to your protocols.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+        </div>
+        <h3>Long Shelf Life</h3>
+        <p>Our proprietary inclusion complex keeps peptides pre-reconstituted and molecularly stable for up to 24 months — no refrigeration required, no powder to mix. Shake it, drop it, leave it on the shelf.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section section-dark" id="products">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Product Catalog</div>
+      <h2>Peptides for Every Protocol</h2>
+      <p>Browse our core categories or request our full catalog with 50+ peptide compounds available for wholesale.</p>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <span class="product-emoji">⚖️</span>
+        <h3>Weight Loss Peptides</h3>
+        <p>Clinically-relevant compounds supporting metabolic function and body composition protocols for your weight management patients.</p>
+        <div class="product-tags">
+          <span class="product-tag">Semaglutide</span>
+          <span class="product-tag">Tirzepatide</span>
+          <span class="product-tag">AOD-9604</span>
+          <span class="product-tag">+ More</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <span class="product-emoji">🔬</span>
+        <h3>Recovery Peptides</h3>
+        <p>Support your patients' tissue repair and recovery protocols with research-backed peptide compounds.</p>
+        <div class="product-tags">
+          <span class="product-tag">BPC-157</span>
+          <span class="product-tag">TB-500</span>
+          <span class="product-tag">KPV</span>
+          <span class="product-tag">+ More</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <span class="product-emoji">⚡</span>
+        <h3>Endurance Peptides</h3>
+        <p>Performance and vitality peptides for sports medicine and anti-aging protocols focused on energy and output.</p>
+        <div class="product-tags">
+          <span class="product-tag">CJC-1295</span>
+          <span class="product-tag">Ipamorelin</span>
+          <span class="product-tag">Tesamorelin</span>
+          <span class="product-tag">+ More</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <span class="product-emoji">✨</span>
+        <h3>Cosmetic Peptides</h3>
+        <p>Skin rejuvenation and aesthetic peptides for med spas and dermatology practices seeking premium ingredients.</p>
+        <div class="product-tags">
+          <span class="product-tag">GHK-Cu</span>
+          <span class="product-tag">Melanotan II</span>
+          <span class="product-tag">PT-141</span>
+          <span class="product-tag">+ More</span>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:48px;">
+      <a href="#contact" class="btn-primary">Request Full Catalog →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section" id="why-us">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">The ClearMedsCorp Difference</div>
+      <h2>Your Patients Deserve Better</h2>
+      <p>We built this company because clinics deserve a peptide supplier that operates at the same standard they hold themselves to.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-list">
+        <div class="why-item">
+          <div class="why-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+          <div>
+            <h4>Full Transparency</h4>
+            <p>Every order ships with a Certificate of Analysis. We publish our testing methodology and welcome facility inquiries.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+          <div>
+            <h4>Dedicated Account Manager</h4>
+            <p>Every wholesale account gets a dedicated point of contact who understands your clinic's needs and ordering patterns.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+          <div>
+            <h4>Flexible Order Sizes</h4>
+            <p>From starter packs for new protocols to bulk orders for established practices — we scale with you.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+          <div>
+            <h4>Regulatory Compliance Support</h4>
+            <p>We provide documentation and guidance to help your practice maintain compliance with state and federal regulations.</p>
+          </div>
+        </div>
+      </div>
+      <div class="why-stats-card">
+        <div style="text-align:center; margin-bottom:32px;">
+          <div class="section-label" style="color:var(--blue-400);">By the Numbers</div>
+          <h3 style="font-size:1.25rem; color:white;">Trusted by clinics nationwide</h3>
+        </div>
+        <div class="why-stats-grid">
+          <div class="why-stat"><h3>500+</h3><p>Active Accounts</p></div>
+          <div class="why-stat"><h3>50+</h3><p>Peptide Compounds</p></div>
+          <div class="why-stat"><h3>99.5%</h3><p>Average Purity</p></div>
+          <div class="why-stat"><h3>24mo</h3><p>Avg. Shelf Life</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Ready to Upgrade Your Peptide Supply?</h2>
+    <p>Join 500+ clinics who trust ClearMedsCorp for quality, pricing, and reliability.</p>
+    <a href="#contact" class="btn-primary" style="background:white; color:var(--blue-600);">Open a Wholesale Account →</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section section-gray" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Get Started</div>
+      <h2>Request Wholesale Pricing</h2>
+      <p>Fill out the form below and our team will send you a custom pricing sheet within one business day.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Let's Talk Peptides</h3>
+        <p>Whether you're launching a new protocol or switching suppliers, we make onboarding simple. 100-unit minimum per SKU on your first order.</p>
+        <div class="contact-detail">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <div><strong>Email</strong><span>sales@clearmeds.bio</span></div>
+        </div>
+        <div class="contact-detail">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <div><strong>Phone</strong><span>(713) 280-9876</span></div>
+        </div>
+        <div class="contact-detail">
+          <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+          <div><strong>Hours</strong><span>Mon–Fri, 8AM–6PM CST</span></div>
+        </div>
+      </div>
+      <form class="form-card" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name *</label>
+            <input type="text" name="firstName" required placeholder="John">
+          </div>
+          <div class="form-group">
+            <label>Last Name *</label>
+            <input type="text" name="lastName" required placeholder="Smith">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Clinic / Practice Name *</label>
+          <input type="text" name="clinic" required placeholder="Elite Wellness Clinic">
+        </div>
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" name="email" required placeholder="john@elitewellness.com">
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" name="phone" placeholder="(555) 123-4567">
+        </div>
+        <div class="form-group">
+          <label>Clinic Type</label>
+          <select name="clinicType">
+            <option value="">Select your clinic type...</option>
+            <option>Med Spa</option>
+            <option>Anti-Aging Clinic</option>
+            <option>Sports Medicine Clinic</option>
+            <option>Weight Loss Clinic</option>
+            <option>Wellness / Integrative</option>
+            <option>Dermatology</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Which products are you interested in?</label>
+          <textarea name="message" placeholder="e.g., Semaglutide, BPC-157, custom formulations..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Submit Inquiry →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span>© 2026 ClearMedsCorp. All rights reserved. For licensed healthcare professionals only.</span>
+    <div class="footer-links">
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Service</a>
+      <a href="#">Compliance</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// Form handler
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = '✓ Inquiry Submitted!';
+  btn.style.background = '#16a34a';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = 'Submit Inquiry →';
+    btn.style.background = '';
+    btn.disabled = false;
+    e.target.reset();
+  }, 3000);
+}
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = 1; e.target.style.transform = 'translateY(0)'; }});
+}, { threshold: 0.1 });
+document.querySelectorAll('.value-card, .product-card, .why-item').forEach(el => {
+  el.style.opacity = 0; el.style.transform = 'translateY(20px)'; el.style.transition = 'opacity .5s, transform .5s';
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>
