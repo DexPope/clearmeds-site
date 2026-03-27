@@ -3,7 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ClearMeds — Premium Wholesale Peptides for Clinics</title>
+<title>ClearMeds — Wholesale Peptides Direct from a Licensed Manufacturer</title>
+<meta name="description" content="ClearMeds is a licensed cGMP drug manufacturer supplying premium peptides wholesale to clinics — pre-reconstituted, room-temp stable, no cold chain. Not a compounder. Unaffected by FDA enforcement.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://clearmeds.bio">
+<meta property="og:title" content="ClearMeds — Wholesale Peptides Direct from a Licensed Manufacturer">
+<meta property="og:description" content="Licensed cGMP manufacturer. Pre-reconstituted peptides. No cold chain. No import tariffs. No FDA enforcement risk. 10-unit samples available.">
+<meta property="og:image" content="https://clearmeds.bio/logo.png">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ClearMeds — Wholesale Peptides Direct from a Licensed Manufacturer">
+<meta name="twitter:description" content="Licensed cGMP manufacturer. Pre-reconstituted peptides. No cold chain. No import tariffs. No FDA enforcement risk.">
+<meta name="twitter:image" content="https://clearmeds.bio/logo.png">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://clearmeds.bio">
 
 <!-- Google Analytics — replace G-XXXXXXXXXX with your GA4 Measurement ID -->
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
@@ -314,6 +331,59 @@ footer { background: var(--navy); padding: 52px 28px; text-align: center; border
 .trust-item span { font-family: 'Montserrat', sans-serif; font-size: .72rem; font-weight: 700; color: var(--muted); letter-spacing: 0.5px; text-transform: uppercase; }
 .trust-divider { width: 1px; height: 22px; background: var(--border); }
 
+/* ==================== COMPARISON TABLE ==================== */
+.compare-wrap { overflow-x: auto; }
+.compare-table { width: 100%; border-collapse: collapse; border-radius: 12px; overflow: hidden; }
+.compare-table thead th { padding: 18px 24px; font-family: 'Montserrat', sans-serif; font-size: .78rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+.compare-table thead th:first-child { background: var(--navy); color: rgba(255,255,255,0.4); text-align: left; }
+.compare-table thead th.col-them { background: #2a1a1a; color: #c44; }
+.compare-table thead th.col-us { background: var(--navy-mid); color: var(--gold-light); }
+.compare-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.06); }
+.compare-table tbody tr:last-child { border-bottom: none; }
+.compare-table tbody td { padding: 15px 24px; font-size: .9rem; }
+.compare-table tbody td:first-child { background: rgba(13,27,42,0.5); color: rgba(255,255,255,0.7); font-weight: 600; font-family: 'Montserrat', sans-serif; font-size: .8rem; letter-spacing: .3px; }
+.compare-table tbody td.them { background: rgba(42,26,26,0.6); color: #c44; font-weight: 700; text-align: center; font-size: 1rem; }
+.compare-table tbody td.us { background: rgba(23,55,94,0.5); color: #4ecb8d; font-weight: 700; text-align: center; font-size: 1rem; }
+.compare-table tbody td.us span { display: block; font-family: 'Nunito', sans-serif; font-size: .82rem; font-weight: 400; color: rgba(255,255,255,0.55); margin-top: 2px; }
+
+/* ==================== TESTIMONIALS ==================== */
+.testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.testi-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 14px; padding: 32px; position: relative;
+  border-top: 3px solid var(--gold); transition: box-shadow .3s;
+}
+.testi-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.09); }
+.testi-quote-mark {
+  font-family: 'Cormorant Garamond', serif; font-size: 5rem;
+  color: var(--gold); line-height: 1; opacity: 0.25;
+  position: absolute; top: 16px; right: 22px;
+}
+.testi-text { font-size: .97rem; color: var(--muted); line-height: 1.8; margin-bottom: 24px; font-style: italic; }
+.testi-author { display: flex; align-items: center; gap: 14px; }
+.testi-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy-mid), var(--navy));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: .9rem;
+  color: var(--gold-light); flex-shrink: 0;
+}
+.testi-name { font-family: 'Montserrat', sans-serif; font-size: .82rem; font-weight: 700; color: var(--text); }
+.testi-title { font-size: .8rem; color: var(--muted); margin-top: 2px; }
+.testi-stars { color: var(--gold); font-size: .85rem; letter-spacing: 2px; margin-bottom: 14px; }
+
+/* ==================== PHONE CTA ==================== */
+.phone-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(184,149,42,0.08); border: 1px solid rgba(184,149,42,0.25);
+  border-radius: 8px; padding: 14px 20px; text-decoration: none;
+  transition: all .2s; margin-top: 8px;
+}
+.phone-cta:hover { background: rgba(184,149,42,0.15); border-color: var(--gold); }
+.phone-cta svg { width: 18px; height: 18px; fill: var(--gold); }
+.phone-cta strong { display: block; font-family: 'Montserrat', sans-serif; font-size: .72rem; font-weight: 700; color: var(--text); letter-spacing: .8px; text-transform: uppercase; }
+.phone-cta span { font-size: 1.05rem; color: var(--gold); font-weight: 700; }
+
 /* ==================== FAQ ==================== */
 .faq-list { max-width: 820px; margin: 0 auto; }
 .faq-item { border-bottom: 1px solid var(--border); }
@@ -336,7 +406,7 @@ footer { background: var(--navy); padding: 52px 28px; text-align: center; border
 
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 1024px) {
-  .problem-grid, .diff-grid, .ic-grid, .benefits-grid, .contact-grid { grid-template-columns: 1fr; }
+  .problem-grid, .diff-grid, .ic-grid, .benefits-grid, .contact-grid, .testi-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
   .nav-links, .nav-cta { display: none; }
@@ -364,6 +434,7 @@ footer { background: var(--navy); padding: 52px 28px; text-align: center; border
       <li><a href="#solution">About</a></li>
       <li><a href="#difference">Why Us</a></li>
       <li><a href="#products">Products</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="#contact" class="nav-cta">Request Pricing</a>
@@ -560,6 +631,76 @@ footer { background: var(--navy); padding: 52px 28px; text-align: center; border
   </div>
 </section>
 
+<!-- COMPARISON TABLE -->
+<section class="section section-dark" id="compare">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">The Case for Switching</div>
+      <h2>ClearMeds vs. Compounding Pharmacies</h2>
+      <div class="gold-rule"></div>
+      <p>The difference isn't incremental — it's structural.</p>
+    </div>
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="col-them">Compounding Pharmacy</th>
+            <th class="col-us">ClearMeds</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>FDA Enforcement Risk</td>
+            <td class="them">✕<span></span></td>
+            <td class="us">✓<span>Commercial manufacturer — unaffected</span></td>
+          </tr>
+          <tr>
+            <td>Supply Continuity</td>
+            <td class="them">✕</td>
+            <td class="us">✓<span>16+ years, zero shutdowns</span></td>
+          </tr>
+          <tr>
+            <td>Cold Chain Required</td>
+            <td class="them">✕</td>
+            <td class="us">✓<span>Room temp — no cold chain needed</span></td>
+          </tr>
+          <tr>
+            <td>Reconstitution Required</td>
+            <td class="them">✕</td>
+            <td class="us">✓<span>Pre-reconstituted, ready to administer</span></td>
+          </tr>
+          <tr>
+            <td>Shelf Life</td>
+            <td class="them">✕<span style="display:block;font-size:.78rem;color:#c44;margin-top:2px;">30–90 days typical</span></td>
+            <td class="us">✓<span>15 months at room temperature</span></td>
+          </tr>
+          <tr>
+            <td>Import Tariffs</td>
+            <td class="them">✕<span style="display:block;font-size:.78rem;color:#c44;margin-top:2px;">+15% if foreign-sourced</span></td>
+            <td class="us">✓<span>Domestic manufacturer — 0% tariff</span></td>
+          </tr>
+          <tr>
+            <td>COA With Every Order</td>
+            <td class="them">✕</td>
+            <td class="us">✓<span>Third-party HPLC + mass spec</span></td>
+          </tr>
+          <tr>
+            <td>Pricing Transparency</td>
+            <td class="them">✕</td>
+            <td class="us">✓<span>Direct from manufacturer — no markup</span></td>
+          </tr>
+          <tr>
+            <td>Dosing Consistency</td>
+            <td class="them">✕<span style="display:block;font-size:.78rem;color:#c44;margin-top:2px;">Batch-to-batch variation</span></td>
+            <td class="us">✓<span>Standardized, no titration required</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
 <!-- INCLUSION COMPLEX -->
 <section class="section section-dark" id="technology">
   <div class="container">
@@ -677,6 +818,59 @@ footer { background: var(--navy); padding: 52px 28px; text-align: center; border
   </div>
 </section>
 
+<!-- TESTIMONIALS -->
+<section class="section" id="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">From the Clinics</div>
+      <h2>What Clinic Owners Are Saying</h2>
+      <div class="gold-rule"></div>
+    </div>
+    <div class="testi-grid">
+
+      <div class="testi-card">
+        <div class="testi-quote-mark">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">We switched from a compounding pharmacy after our third supply disruption in six months. ClearMeds has been flawless — same-week shipping, COA with every order, and the pre-reconstituted vials eliminated an entire prep step for our staff. I wish we'd made the switch sooner.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">DM</div>
+          <div>
+            <div class="testi-name">Dr. D. Morrison</div>
+            <div class="testi-title">Medical Director · Peak Performance Clinic, TX</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-quote-mark">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">The inclusion complex technology is a genuine differentiator. No cold chain, 15-month shelf life, room temperature storage — it simplified our entire inventory operation. And the fact that they're a licensed manufacturer, not a compounder, means I don't have to wake up and wonder if our supply is still legal.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AK</div>
+          <div>
+            <div class="testi-name">A. Keller, NP</div>
+            <div class="testi-title">Founder · Revive Med Spa, FL</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-quote-mark">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Margins are significantly better than what we were paying through our old distributor. Direct from the manufacturer with full COA documentation and a dedicated account rep who actually responds. This is how the industry should work. We've expanded our peptide protocol offerings by four SKUs since onboarding.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">JR</div>
+          <div>
+            <div class="testi-name">J. Ramos, MD</div>
+            <div class="testi-title">Owner · Elite Men's Health, CA</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- FACILITY VISIT -->
 <section class="section">
   <div class="container">
@@ -720,7 +914,7 @@ footer { background: var(--navy); padding: 52px 28px; text-align: center; border
 
     <div style="text-align:center;margin-top:36px;">
       <a href="#contact" class="btn-primary">Request Full Catalog & Pricing →</a>
-      <p style="font-size:.85rem;color:var(--muted);margin-top:14px;">10-unit samples available for new accounts &nbsp;·&nbsp; 100-unit standard minimum &nbsp;·&nbsp; Volume discounts available &nbsp;·&nbsp; COA included with every order</p>
+      <p style="font-size:.85rem;color:var(--muted);margin-top:14px;">10-unit samples available for new accounts — <strong>sample cost credited toward your first bulk order</strong> &nbsp;·&nbsp; 100-unit standard minimum &nbsp;·&nbsp; Volume discounts available &nbsp;·&nbsp; COA included</p>
     </div>
   </div>
 </section>
@@ -748,7 +942,7 @@ footer { background: var(--navy); padding: 52px 28px; text-align: center; border
           What's the minimum order quantity?
           <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
         </button>
-        <div class="faq-a"><div class="faq-a-inner">New accounts can request a 10-unit sample to evaluate product quality before committing to a full order. Standard minimum is 100 units per SKU. Volume discounts apply at higher quantities — our team will walk you through tiered pricing when you request a quote.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">New accounts can request a 10-unit sample to evaluate product quality before committing to a full order. The cost of your sample is fully credited toward your first 100-unit bulk order — you're not paying twice. Standard minimum is 100 units per SKU, and volume discounts apply at higher quantities.</div></div>
       </div>
 
       <div class="faq-item">
@@ -836,10 +1030,10 @@ footer { background: var(--navy); padding: 52px 28px; text-align: center; border
           <div class="cd-icon"><svg viewBox="0 0 24 24" fill="#b8952a"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
           <div><strong>Email</strong><a href="mailto:sales@clearmeds.bio">sales@clearmeds.bio</a></div>
         </div>
-        <div class="contact-detail">
-          <div class="cd-icon"><svg viewBox="0 0 24 24" fill="#b8952a"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
-          <div><strong>Phone</strong><a href="tel:+17132809876">(713) 280-9876</a></div>
-        </div>
+        <a href="tel:+17132809876" class="phone-cta">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <div><strong>Call or Text</strong><span>(713) 280-9876</span></div>
+        </a>
         <div class="contact-detail">
           <div class="cd-icon"><svg viewBox="0 0 24 24" fill="#b8952a"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg></div>
           <div><strong>Hours</strong><span>Mon–Fri, 8AM–6PM CST</span></div>
