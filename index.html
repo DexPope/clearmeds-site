@@ -846,12 +846,11 @@ footer { background: var(--navy); padding: 52px 28px; text-align: center; border
         </div>
 
       </div>
-      <!-- Formspree: sign up free at formspree.io → create form for sales@clearmeds.bio → paste your form ID below -->
-      <form class="form-card" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" onsubmit="handleSubmit(event)">
-        <input type="hidden" name="_next" value="https://clearmeds.bio/price-list.html">
-        <input type="hidden" name="_subject" value="New ClearMeds Wholesale Inquiry">
-        <input type="hidden" name="_replyto" value="">
-        <input type="text" name="_gotcha" style="display:none"><!-- honeypot spam filter -->
+      <form class="form-card" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="b55a64b3-148b-4ae3-b7ab-156c9720fe9f">
+        <input type="hidden" name="subject" value="New ClearMeds Wholesale Inquiry">
+        <input type="hidden" name="redirect" value="https://clearmeds.bio/price-list.html">
+        <input type="checkbox" name="botcheck" style="display:none"><!-- honeypot -->
         <div class="form-row">
           <div class="form-group"><label>First Name *</label><input type="text" name="firstName" required placeholder="John"></div>
           <div class="form-group"><label>Last Name *</label><input type="text" name="lastName" required placeholder="Smith"></div>
@@ -913,21 +912,12 @@ function toggleFaq(btn) {
   if (!isOpen) item.classList.add('open');
 }
 
-/* ── Form submit ── */
-function handleSubmit(e) {
-  const btn = e.target.querySelector('.form-submit');
+/* ── Form submit — show loading state while Web3Forms POSTs ── */
+document.querySelector('.form-card').addEventListener('submit', function() {
+  const btn = this.querySelector('.form-submit');
   btn.textContent = 'Sending...';
   btn.disabled = true;
-  // Formspree handles redirect via _next field after real submission
-  // This fallback handles the no-JS / local preview case
-  if (e.target.action.includes('YOUR_FORM_ID')) {
-    e.preventDefault();
-    btn.textContent = 'Submitted — Check your email!';
-    btn.style.background = '#2d7a4f'; btn.style.color = '#fff';
-    setTimeout(() => { btn.textContent = 'Submit Inquiry & Get Pricing →'; btn.style.background = ''; btn.style.color = ''; btn.disabled = false; e.target.reset(); }, 3000);
-  }
-  // If real Formspree ID is set, let the form POST naturally → redirects to price-list.html
-}
+});
 
 /* ── Scroll-in animations ── */
 const observer = new IntersectionObserver((entries) => {
