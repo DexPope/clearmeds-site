@@ -3,798 +3,706 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ClearMedsCorp — Wholesale Product Catalog</title>
+<title>ClearMedsCorp — Wholesale Price List</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #0d1117;
+  --bg-card-alt: linear-gradient(135deg, #0d1a2a, #111c2e);
+  --border: #1a2332;
+  --border-light: #1a3a5c;
+  --cyan: #00b4d8;
+  --cyan-light: #00e5ff;
+  --white: #ffffff;
+  --gray: #8899aa;
+  --gray-dark: #667788;
+  --gray-darker: #556677;
+  --green: #00c853;
+  --red: #ff4444;
+  --orange: #ff9800;
+  --radius: 12px;
+}
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: #0a0a0a;
-    color: #e0e0e0;
-    padding: 0;
-  }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: #e0e0e0; -webkit-font-smoothing: antialiased; }
 
-  .page {
-    max-width: 850px;
-    margin: 0 auto;
-    background: #111;
-    min-height: 100vh;
-  }
+/* ---- NAV ---- */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10,10,10,.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow .3s;
+}
+nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,.4); }
+.nav-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between; height: 72px;
+}
+.logo {
+  font-weight: 900; font-size: 1.45rem; color: var(--white);
+  text-decoration: none; display: flex; align-items: center; gap: 0;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  text-shadow: 0 0 18px rgba(0,180,216,0.25);
+}
+.logo span { color: var(--cyan); letter-spacing: 0.06em; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { text-decoration: none; color: var(--gray); font-size: .9rem; font-weight: 500; transition: color .2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--cyan); }
+.nav-cta {
+  background: var(--cyan); color: #0a1628; padding: 10px 24px; border-radius: 8px;
+  text-decoration: none; font-weight: 700; font-size: .9rem; transition: all .2s;
+}
+.nav-cta:hover { background: var(--cyan-light); }
+.mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.mobile-toggle span { display: block; width: 24px; height: 2px; background: var(--white); margin: 5px 0; border-radius: 2px; }
 
-  /* Header */
-  .header {
-    background: linear-gradient(135deg, #0a1628 0%, #0d2847 50%, #0a1628 100%);
-    padding: 50px 50px 40px;
-    border-bottom: 2px solid #00b4d8;
-    position: relative;
-    overflow: hidden;
-  }
+/* ---- HERO ---- */
+.hero {
+  padding: 160px 24px 100px; width: 100%;
+  background: linear-gradient(135deg, #0a1628 0%, #0d2847 40%, #0a1628 100%);
+  position: relative; overflow: hidden;
+  border-bottom: 2px solid var(--cyan);
+}
+.hero::before {
+  content: ''; position: absolute; top: -50%; right: -20%; width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(0,180,216,.12) 0%, transparent 70%); border-radius: 50%;
+}
+.hero::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), var(--cyan-light), var(--cyan), transparent);
+}
+.hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(0,180,216,.1); border: 1px solid rgba(0,180,216,.25);
+  padding: 8px 16px; border-radius: 100px; font-size: .8rem; color: var(--cyan);
+  font-weight: 500; margin-bottom: 24px;
+}
+.hero-badge .dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.4; } }
+.hero h1 { font-size: clamp(2.2rem,4.5vw,3.25rem); font-weight: 800; color: var(--white); line-height: 1.15; max-width: 780px; margin-bottom: 20px; letter-spacing: -.02em; }
+.hero h1 em { font-style: normal; color: var(--cyan); }
+.hero p.hero-sub { font-size: 1.15rem; color: var(--gray); max-width: 620px; margin-bottom: 16px; line-height: 1.7; }
+.hero-meta { font-size: .85rem; color: var(--gray-dark); margin-bottom: 36px; }
+.hero-meta strong { color: var(--cyan); }
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  background: linear-gradient(135deg, var(--cyan), var(--cyan-light)); color: #0a1628;
+  padding: 16px 32px; border-radius: 10px; text-decoration: none; font-weight: 700;
+  font-size: 1rem; border: none; cursor: pointer; transition: all .2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,180,216,.3); }
+.btn-secondary {
+  background: rgba(0,180,216,.1); color: var(--cyan); padding: 16px 32px; border-radius: 10px;
+  text-decoration: none; font-weight: 600; font-size: 1rem; border: 1px solid rgba(0,180,216,.25);
+  transition: all .2s; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-secondary:hover { background: rgba(0,180,216,.18); }
 
-  .header::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #00b4d8, #00e5ff, #00b4d8, transparent);
-  }
+/* ---- SECTIONS ---- */
+.section { padding: 80px 24px; }
+.section-alt { background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.container { max-width: 1200px; margin: 0 auto; }
+.section-header { text-align: center; max-width: 720px; margin: 0 auto 56px; }
+.section-label { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--cyan); margin-bottom: 12px; }
+.section-header h2 { font-size: clamp(1.75rem,3.5vw,2.5rem); font-weight: 800; color: var(--white); letter-spacing: -.02em; margin-bottom: 16px; }
+.section-header p { color: var(--gray); font-size: 1.05rem; line-height: 1.7; }
 
-  .header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
+/* ---- STATS BAR ---- */
+.cred-stats {
+  display: flex; justify-content: center; gap: 0;
+  background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); width: 100%;
+}
+.cred-stat { flex: 1; text-align: center; padding: 28px 16px; border-right: 1px solid var(--border); }
+.cred-stat:last-child { border-right: none; }
+.cred-stat .num { font-size: 2rem; font-weight: 800; color: var(--cyan-light); }
+.cred-stat .label { font-size: .7rem; font-weight: 600; color: var(--gray-dark); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; }
 
-  .header h1 { font-size: 32px; font-weight: 700; color: #fff; letter-spacing: 2px; margin-bottom: 6px; }
-  .header .tagline { font-size: 13px; color: #00b4d8; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; }
-  .header-right { text-align: right; font-size: 13px; color: #8899aa; line-height: 1.8; }
-  .header-right strong { color: #fff; }
-  .header .hero { margin-top: 30px; }
-  .header .hero h2 { font-size: 24px; font-weight: 700; color: #fff; line-height: 1.3; margin-bottom: 10px; }
-  .header .hero p { font-size: 14px; color: #8899aa; line-height: 1.6; }
-  .header .doc-date { font-size: 12px; color: #556677; margin-top: 16px; }
+/* ---- WHY CHOOSE CARDS ---- */
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.why-card {
+  background: var(--bg-card-alt); border: 1px solid var(--border-light);
+  border-radius: var(--radius); padding: 28px; text-align: center; transition: border-color .3s;
+}
+.why-card:hover { border-color: var(--cyan); }
+.why-card .icon { font-size: 28px; margin-bottom: 12px; display: block; }
+.why-card h4 { font-size: .95rem; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+.why-card p { font-size: .88rem; color: var(--gray-dark); line-height: 1.6; }
 
-  /* Credential Stats */
-  .cred-stats {
-    display: flex;
-    justify-content: center;
-    gap: 0;
-    background: #0d1117;
-    border-bottom: 1px solid #1a2332;
-  }
+/* ---- PROBLEM CARDS ---- */
+.problem-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 40px; }
+.problem-item { display: flex; align-items: flex-start; gap: 12px; font-size: .95rem; color: var(--gray); line-height: 1.6; }
+.problem-item .x { color: var(--red); font-weight: 700; font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
 
-  .cred-stat {
-    flex: 1;
-    text-align: center;
-    padding: 24px 16px;
-    border-right: 1px solid #1a2332;
-  }
+/* ---- ADVANTAGE GRID ---- */
+.advantage-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.advantage-item { display: flex; gap: 14px; align-items: flex-start; }
+.advantage-item .adv-icon { font-size: 26px; flex-shrink: 0; margin-top: 2px; }
+.advantage-item h4 { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+.advantage-item p { font-size: .9rem; color: var(--gray-dark); line-height: 1.6; }
 
-  .cred-stat:last-child { border-right: none; }
-  .cred-stat .num { font-size: 28px; font-weight: 700; color: #00e5ff; }
-  .cred-stat .label { font-size: 10px; font-weight: 600; color: #667788; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; }
+/* ---- CLINIC BENEFITS ---- */
+.benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.benefit-item { display: flex; gap: 12px; align-items: flex-start; }
+.benefit-item .check { color: var(--green); font-weight: 700; flex-shrink: 0; font-size: 1.1rem; margin-top: 2px; }
+.benefit-item strong { color: var(--white); display: block; margin-bottom: 4px; font-size: .95rem; }
+.benefit-item span { color: var(--gray-dark); font-size: .9rem; line-height: 1.6; }
+.benefit-item a { color: var(--cyan-light); text-decoration: none; }
 
-  /* Why Choose Cards */
-  .why-section { padding: 30px 50px; }
-  .section-title {
-    font-size: 14px; font-weight: 700; color: #00b4d8;
-    text-transform: uppercase; letter-spacing: 2px;
-    margin-bottom: 20px; padding-bottom: 10px;
-    border-bottom: 1px solid #1a2332;
-  }
+/* ---- PRODUCT CATEGORIES ---- */
+.cat-row {
+  display: flex; align-items: center; padding: 16px 0;
+  border-bottom: 1px solid #141c26; gap: 16px;
+}
+.cat-row:first-of-type { border-top: 1px solid #141c26; }
+.cat-name { font-size: .95rem; font-weight: 700; color: var(--white); width: 140px; flex-shrink: 0; }
+.cat-compounds { font-size: .88rem; color: var(--gray); flex: 1; }
+.cat-app { font-size: .85rem; color: var(--gray-dark); flex: 1; }
+.cat-tag { font-size: .6rem; font-weight: 700; padding: 3px 8px; border-radius: 3px; background: var(--red); color: var(--white); flex-shrink: 0; letter-spacing: .5px; }
 
-  .why-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-  }
+/* ---- WHO WE SERVE ---- */
+.serve-tags { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+.serve-tag {
+  background: rgba(0,180,216,.08); border: 1px solid rgba(0,180,216,.2);
+  border-radius: 100px; padding: 10px 22px; font-size: .9rem; font-weight: 500; color: var(--cyan);
+  transition: all .2s;
+}
+.serve-tag:hover { background: rgba(0,180,216,.15); border-color: var(--cyan); }
 
-  /* Mobile responsive */
-  @media (max-width: 768px) {
-    .header { padding: 30px 20px; }
-    .header h1 { font-size: 24px; }
-    .header .hero h2 { font-size: 20px; }
-    .header-top { flex-direction: column; gap: 12px; }
-    .header-right { text-align: left; }
-    .badges { padding: 16px 20px; }
-    .why-section, .section, .advantages-section, .categories-section, .serve-section { padding: 24px 20px; }
-    .problem-section, .benefits-section { padding: 24px 20px; }
-    .notes { padding: 24px 20px; }
-    .cta-banner { padding: 30px 20px; }
-    .footer { padding: 30px 20px; }
-    .why-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .why-card { padding: 14px; }
-    .why-card h4 { font-size: 11px; }
-    .why-card p { font-size: 10px; }
-    .problem-grid { grid-template-columns: 1fr; }
-    .advantage-grid { grid-template-columns: 1fr; }
-    .benefits-grid { grid-template-columns: 1fr; }
-    .cat-row { flex-wrap: wrap; gap: 4px; }
-    .cat-name { width: 100%; font-size: 14px; }
-    .cat-compounds, .cat-app { font-size: 11px; }
-    .serve-tags { gap: 8px; }
-    .serve-tag { font-size: 11px; padding: 6px 14px; }
-    .product-table td { padding: 10px 8px; font-size: 12px; }
-    .product-table td:last-child { font-size: 14px; }
-    .product-table thead th { font-size: 10px; padding: 8px; }
-    .cred-stat .num { font-size: 22px; }
-    .cred-stat .label { font-size: 9px; }
-    .cred-stat { padding: 16px 8px; }
-  }
+/* ---- PRICE TABLE ---- */
+.table-wrap { overflow-x: auto; }
+.product-table { width: 100%; border-collapse: collapse; }
+.product-table thead th {
+  text-align: left; font-size: .75rem; font-weight: 700; color: var(--gray-dark);
+  text-transform: uppercase; letter-spacing: .1em;
+  padding: 12px 16px; border-bottom: 1px solid var(--border);
+}
+.product-table thead th:last-child { text-align: right; }
+.product-table tbody tr { border-bottom: 1px solid #141c26; transition: background .2s; }
+.product-table tbody tr:hover { background: rgba(0,180,216,.03); }
+.product-table td { padding: 14px 16px; font-size: .95rem; }
+.product-table td:first-child { font-weight: 600; color: var(--white); }
+.product-table td:nth-child(2) { color: var(--gray); font-size: .88rem; }
+.product-table td:last-child { text-align: right; font-weight: 800; color: var(--cyan-light); font-size: 1.05rem; white-space: nowrap; }
+.category-row td {
+  background: rgba(0,180,216,.06) !important; font-size: .78rem !important; font-weight: 700 !important;
+  color: var(--cyan) !important; text-transform: uppercase; letter-spacing: .12em;
+  padding: 14px 16px 10px !important; border-bottom: 1px solid var(--border-light) !important;
+  border-top: 1px solid var(--border-light);
+}
+.highlight-row { background: linear-gradient(90deg, rgba(0,180,216,.05), transparent); }
+.highlight-row td:first-child { color: var(--cyan-light); }
+.tag {
+  display: inline-block; font-size: .65rem; font-weight: 700;
+  padding: 2px 7px; border-radius: 3px; margin-left: 8px;
+  vertical-align: middle; letter-spacing: .5px;
+}
+.tag-hot { background: var(--red); color: #fff; }
+.tag-popular { background: var(--cyan); color: #000; }
+.tag-new { background: var(--green); color: #000; }
+.tag-moq { background: var(--orange); color: #000; }
 
-  @media (max-width: 400px) {
-    .why-grid { grid-template-columns: 1fr; }
-  }
+/* ---- TABLE INTRO NOTE ---- */
+.table-note { font-size: .85rem; color: var(--gray-dark); margin-bottom: 24px; line-height: 1.6; }
+.table-note strong { color: var(--white); }
 
-  .why-card {
-    background: linear-gradient(135deg, #0d1a2a, #111c2e);
-    border: 1px solid #1a2d44;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    transition: border-color 0.3s;
-  }
+/* ---- SAMPLE PROGRAM HIGHLIGHT ---- */
+.sample-highlight {
+  background: rgba(0,200,83,.06); border: 1px solid rgba(0,200,83,.2);
+  border-radius: var(--radius); padding: 28px 32px; margin-bottom: 32px;
+}
+.sample-highlight h3 { font-size: 1.1rem; font-weight: 700; color: var(--green); margin-bottom: 10px; }
+.sample-highlight p { font-size: .95rem; color: var(--gray); line-height: 1.7; }
+.sample-highlight p strong { color: var(--white); }
 
-  .why-card:hover { border-color: #00b4d8; }
-  .why-card .icon { font-size: 24px; margin-bottom: 10px; }
-  .why-card h4 { font-size: 12px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
-  .why-card p { font-size: 11px; color: #667788; line-height: 1.5; }
+/* ---- NOTES LIST ---- */
+.notes-list { list-style: none; padding: 0; }
+.notes-list li {
+  padding: 10px 0 10px 24px; font-size: .95rem; color: var(--gray);
+  border-bottom: 1px solid #141c26; position: relative; line-height: 1.6;
+}
+.notes-list li:last-child { border-bottom: none; }
+.notes-list li::before { content: '→'; position: absolute; left: 0; color: var(--cyan); font-weight: 700; }
+.notes-list li strong { color: var(--white); }
 
-  /* Problem Section */
-  .problem-section {
-    padding: 30px 50px;
-    background: #0d1117;
-    border-top: 1px solid #1a2332;
-    border-bottom: 1px solid #1a2332;
-  }
+/* ---- CTA BANNER ---- */
+.cta-banner {
+  background: linear-gradient(135deg, #003d5b, #00587a);
+  padding: 60px 24px; text-align: center;
+  border-top: 1px solid var(--cyan); border-bottom: 1px solid var(--cyan);
+}
+.cta-banner h3 { font-size: 1.75rem; font-weight: 800; color: var(--white); margin-bottom: 10px; }
+.cta-banner p { font-size: 1.1rem; color: var(--gray); margin-bottom: 28px; }
 
-  .problem-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
+/* ---- CONTACT STRIP ---- */
+.contact-strip {
+  background: var(--bg-card); border-top: 1px solid var(--border);
+  padding: 40px 24px; text-align: center;
+}
+.contact-strip .contact-name { font-size: 1.2rem; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.contact-strip .contact-title { font-size: .9rem; color: var(--cyan); margin-bottom: 20px; }
+.contact-strip .contact-details { font-size: .95rem; color: var(--gray); line-height: 2.2; }
+.contact-strip .contact-details a { color: var(--cyan-light); text-decoration: none; }
 
-  .problem-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 13px;
-    color: #8899aa;
-    line-height: 1.5;
-  }
+/* ---- FOOTER ---- */
+footer {
+  background: linear-gradient(135deg, #0a1628 0%, #0d2847 100%);
+  padding: 48px 24px; text-align: center;
+  border-top: 2px solid var(--cyan);
+}
+.footer-company { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.footer-division { font-size: .9rem; color: var(--cyan); margin-bottom: 20px; }
+.footer-disclaimer { font-size: .75rem; color: #445566; line-height: 1.6; max-width: 700px; margin: 0 auto; }
+.footer-links { display: flex; justify-content: center; gap: 24px; margin-top: 16px; }
+.footer-links a { color: #445566; text-decoration: none; font-size: .8rem; transition: color .2s; }
+.footer-links a:hover { color: var(--white); }
 
-  .problem-item .x { color: #ff4444; font-weight: 700; font-size: 14px; flex-shrink: 0; }
-
-  /* Product Advantages */
-  .advantages-section { padding: 30px 50px; }
-
-  .advantage-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-
-  .advantage-item {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-  }
-
-  .advantage-item .adv-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
-  .advantage-item h4 { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 4px; }
-  .advantage-item p { font-size: 12px; color: #667788; line-height: 1.5; }
-
-  /* Clinic Benefits */
-  .benefits-section {
-    padding: 30px 50px;
-    background: #0d1117;
-    border-top: 1px solid #1a2332;
-    border-bottom: 1px solid #1a2332;
-  }
-
-  .benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
-
-  .benefit-item {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    font-size: 13px;
-  }
-
-  .benefit-item .check { color: #00c853; font-weight: 700; flex-shrink: 0; }
-  .benefit-item strong { color: #fff; }
-  .benefit-item span { color: #667788; }
-
-  /* Product Categories Overview */
-  .categories-section { padding: 30px 50px; }
-
-  .cat-row {
-    display: flex;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid #141c26;
-    gap: 16px;
-  }
-
-  .cat-name { font-size: 13px; font-weight: 600; color: #fff; width: 120px; flex-shrink: 0; }
-  .cat-compounds { font-size: 12px; color: #8899aa; flex: 1; }
-  .cat-app { font-size: 12px; color: #667788; flex: 1; }
-  .cat-tag {
-    font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 3px;
-    background: #ff4444; color: #fff; flex-shrink: 0; letter-spacing: 0.5px;
-  }
-
-  /* Who We Serve */
-  .serve-section { padding: 20px 50px 30px; }
-  .serve-tags { display: flex; gap: 10px; flex-wrap: wrap; }
-  .serve-tag {
-    background: #0d1a2a;
-    border: 1px solid #1a3a5c;
-    border-radius: 20px;
-    padding: 8px 18px;
-    font-size: 12px;
-    font-weight: 500;
-    color: #00b4d8;
-  }
-
-  /* Badges row */
-  .badges {
-    display: flex; gap: 12px; flex-wrap: wrap;
-    padding: 24px 50px;
-    background: #0d1117;
-    border-bottom: 1px solid #1a2332;
-  }
-
-  .badge {
-    background: linear-gradient(135deg, #0d2847, #112d4e);
-    border: 1px solid #1a3a5c;
-    border-radius: 8px;
-    padding: 10px 16px;
-    font-size: 11px; font-weight: 600;
-    color: #00b4d8;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-
-  /* Section general */
-  .section { padding: 30px 50px; }
-
-  /* Product table */
-  .product-table { width: 100%; border-collapse: collapse; }
-  .product-table thead th {
-    text-align: left; font-size: 11px; font-weight: 600; color: #667788;
-    text-transform: uppercase; letter-spacing: 1px;
-    padding: 10px 12px; border-bottom: 1px solid #1a2332;
-  }
-  .product-table thead th:last-child { text-align: right; }
-  .product-table tbody tr { border-bottom: 1px solid #141c26; transition: background 0.2s; }
-  .product-table tbody tr:hover { background: #0d1a2a; }
-  .product-table td { padding: 14px 12px; font-size: 14px; }
-  .product-table td:first-child { font-weight: 500; color: #fff; }
-  .product-table td:nth-child(2) { color: #8899aa; font-size: 13px; }
-  .product-table td:last-child { text-align: right; font-weight: 700; color: #00e5ff; font-size: 16px; white-space: nowrap; }
-
-  .category-row td {
-    background: #0a1628; font-size: 12px !important; font-weight: 700 !important;
-    color: #00b4d8 !important; text-transform: uppercase; letter-spacing: 1.5px;
-    padding: 16px 12px 8px !important; border-bottom: 1px solid #1a3a5c !important;
-  }
-
-  .highlight-row { background: linear-gradient(90deg, rgba(0,180,216,0.05), transparent); }
-  .highlight-row td:first-child { color: #00e5ff; }
-
-  .tag {
-    display: inline-block; font-size: 9px; font-weight: 700;
-    padding: 2px 6px; border-radius: 3px; margin-left: 8px;
-    vertical-align: middle; letter-spacing: 0.5px;
-  }
-  .tag-hot { background: #ff4444; color: #fff; }
-  .tag-popular { background: #00b4d8; color: #000; }
-  .tag-new { background: #00c853; color: #000; }
-  .tag-moq { background: #ff9800; color: #000; }
-
-  /* Notes */
-  .notes {
-    padding: 30px 50px; background: #0d1117;
-    border-top: 1px solid #1a2332;
-  }
-  .notes h3 {
-    font-size: 14px; font-weight: 700; color: #00b4d8;
-    text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;
-  }
-  .notes ul { list-style: none; padding: 0; }
-  .notes li {
-    padding: 8px 0; font-size: 13px; color: #8899aa;
-    padding-left: 20px; position: relative;
-  }
-  .notes li::before { content: '→'; position: absolute; left: 0; color: #00b4d8; }
-
-  /* CTA Banner */
-  .cta-banner {
-    background: linear-gradient(135deg, #003d5b, #00587a);
-    padding: 36px 50px;
-    text-align: center;
-    border-top: 1px solid #00b4d8;
-    border-bottom: 1px solid #00b4d8;
-  }
-  .cta-banner h3 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px; }
-  .cta-banner p { font-size: 14px; color: #aac; margin-bottom: 20px; }
-  .cta-btn {
-    display: inline-block; background: #00b4d8; color: #000;
-    font-size: 14px; font-weight: 700; padding: 12px 36px;
-    border-radius: 6px; text-decoration: none; text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  /* Footer */
-  .footer {
-    padding: 40px 50px;
-    background: linear-gradient(135deg, #0a1628 0%, #0d2847 100%);
-    border-top: 2px solid #00b4d8;
-    text-align: center;
-  }
-  .footer .contact-name { font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 4px; }
-  .footer .contact-title { font-size: 13px; color: #00b4d8; margin-bottom: 20px; }
-  .footer .contact-info { font-size: 14px; color: #8899aa; line-height: 2; }
-  .footer .contact-info a { color: #00e5ff; text-decoration: none; }
-  .footer .website { margin-top: 16px; font-size: 16px; font-weight: 600; }
-  .footer .website a { color: #00e5ff; text-decoration: none; letter-spacing: 1px; }
-  .footer .disclaimer { margin-top: 24px; font-size: 11px; color: #445566; line-height: 1.6; }
-
-  /* Print */
-  @media print {
-    body { background: #fff; color: #111; }
-    .page { background: #fff; }
-    .header { background: #f0f4f8; border-color: #0066cc; }
-    .header::after { background: #0066cc; }
-    .header h1, .header .hero h2 { color: #111; }
-    .header .tagline { color: #0066cc; }
-    .header-right { color: #444; }
-    .header-right strong { color: #111; }
-    .header .hero p, .header .doc-date { color: #555; }
-    .cred-stats { background: #f8f9fa; }
-    .cred-stat { border-color: #ddd; }
-    .cred-stat .num { color: #0066cc; }
-    .cred-stat .label { color: #666; }
-    .why-card { background: #f8f9fa; border-color: #ddd; }
-    .why-card h4 { color: #111; }
-    .why-card p { color: #555; }
-    .problem-section { background: #f8f9fa; }
-    .problem-item { color: #444; }
-    .advantage-item h4 { color: #111; }
-    .advantage-item p { color: #555; }
-    .benefits-section { background: #f8f9fa; }
-    .benefit-item strong { color: #111; }
-    .benefit-item span { color: #555; }
-    .cat-name { color: #111; }
-    .serve-tag { background: #e8f4f8; color: #0066cc; border-color: #cce; }
-    .section-title { color: #0066cc; border-color: #ddd; }
-    .product-table thead th { color: #666; border-color: #ddd; }
-    .product-table tbody tr { border-color: #eee; }
-    .product-table td:first-child { color: #111; }
-    .product-table td:last-child { color: #0066cc; }
-    .category-row td { background: #f0f4f8; color: #0066cc !important; }
-    .notes { background: #f8f9fa; }
-    .notes li { color: #444; }
-    .cta-banner { background: #e8f4f8; border-color: #0066cc; }
-    .cta-banner h3 { color: #111; }
-    .cta-banner p { color: #444; }
-    .cta-btn { background: #0066cc; color: #fff; }
-    .footer { background: #f0f4f8; border-color: #0066cc; }
-    .footer .contact-name { color: #111; }
-    .footer .contact-info { color: #444; }
-    .footer .contact-info a, .footer .website a { color: #0066cc; }
-  }
+/* ---- RESPONSIVE ---- */
+@media (max-width: 1024px) {
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .problem-grid { grid-template-columns: 1fr; }
+  .advantage-grid { grid-template-columns: 1fr; }
+  .benefits-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .nav-links.show { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: rgba(10,10,10,.98); padding: 20px 24px; gap: 16px; border-bottom: 1px solid var(--border); }
+  .mobile-toggle { display: block; }
+  .hero { padding: 130px 24px 80px; }
+  .section { padding: 60px 20px; }
+  .why-grid { grid-template-columns: 1fr; }
+  .cat-row { flex-wrap: wrap; gap: 4px; }
+  .cat-name { width: 100%; }
+  .hero-actions { flex-direction: column; }
+  .cred-stat .num { font-size: 1.4rem; }
+  .cred-stat .label { font-size: .6rem; }
+  .cred-stat { padding: 18px 8px; }
+  .product-table td { padding: 10px 10px; font-size: .85rem; }
+  .product-table td:last-child { font-size: .95rem; }
+  .sample-highlight { padding: 22px 20px; }
+  .serve-tags { gap: 8px; }
+}
 </style>
 </head>
 <body>
-<div class="page">
 
-  <!-- Header -->
-  <div class="header">
-    <div class="header-top">
-      <div>
-        <h1>CLEARMEDS<span style="color:#00b4d8">CORP</span></h1>
-        <div class="tagline">Wholesale Peptide Manufacturing & Supply</div>
-      </div>
-      <div class="header-right">
-        <strong>sales@clearmeds.bio</strong><br>
-        Made in the USA 🇺🇸
-      </div>
-    </div>
-    <div class="hero">
-      <h2>Your Peptides — Pre-Reconstituted,<br>Shelf-Stable, Ready to Administer</h2>
-      <p>No mixing. No refrigeration. No bacteriostatic water. Up to 15 months of shelf life at any temperature. Direct from the manufacturer.</p>
-    </div>
-    <div class="doc-date">March 2026 — Clinic & Practitioner Wholesale Pricing</div>
+<!-- ==================== NAV ==================== -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo">CLEARMEDS<span>CORP</span></a>
+    <ul class="nav-links">
+      <li><a href="/#solution">About</a></li>
+      <li><a href="/#difference">Why Us</a></li>
+      <li><a href="/#products">Products</a></li>
+      <li><a href="/price-list.html" class="active">Price List</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <a href="/#contact" class="nav-cta">Request Pricing</a>
+    <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+</nav>
 
-  <!-- Credential Stats -->
-  <div class="cred-stats">
-    <div class="cred-stat">
-      <div class="num">16+</div>
-      <div class="label">Years of Manufacturing</div>
-    </div>
-    <div class="cred-stat">
-      <div class="num">cGMP</div>
-      <div class="label">Certified Facility</div>
-    </div>
-    <div class="cred-stat">
-      <div class="num">API</div>
-      <div class="label">Direct Source Manufacturer</div>
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="dot"></span> Licensed Manufacturer · 16+ Years cGMP · 99.5%+ Purity Verified</div>
+    <h1>Wholesale Price List — <em>Direct From the Manufacturer.</em></h1>
+    <p class="hero-sub">Pre-reconstituted, shelf-stable peptides shipped direct from our cGMP-certified facility. No middlemen. No compounding pharmacy risk.</p>
+    <div class="hero-meta">March 2026 — Clinic & Practitioner Wholesale Pricing · Minimum 100 units per SKU · <strong>Volume discounts available</strong></div>
+    <div class="hero-actions">
+      <a href="#prices" class="btn-primary">View Prices ↓</a>
+      <a href="mailto:sales@clearmeds.bio" class="btn-secondary">Email Us →</a>
     </div>
   </div>
+</section>
 
-  <!-- Why Clinics Choose ClearMedsCorp -->
-  <div class="why-section">
-    <div class="section-title">Why Clinics Choose ClearMedsCorp</div>
+<!-- ==================== STATS BAR ==================== -->
+<div class="cred-stats">
+  <div class="cred-stat"><div class="num">99.5%+</div><div class="label">Purity Verified</div></div>
+  <div class="cred-stat"><div class="num">16+</div><div class="label">Years Manufacturing</div></div>
+  <div class="cred-stat"><div class="num">48hr</div><div class="label">Average Ship Time</div></div>
+  <div class="cred-stat"><div class="num">100%</div><div class="label">Made in USA</div></div>
+  <div class="cred-stat"><div class="num">0</div><div class="label">FDA Actions</div></div>
+</div>
+
+<!-- ==================== WHY CHOOSE ==================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Why Clinics Choose Us</div>
+      <h2>Built for Clinics That Can't Afford Disruption</h2>
+      <p>We're not a compounder. We're a licensed commercial drug manufacturer — and the FDA crackdown that's shutting down pharmacies doesn't affect us.</p>
+    </div>
     <div class="why-grid">
       <div class="why-card">
-        <div class="icon">💰</div>
+        <span class="icon">💰</span>
         <h4>Wholesale Pricing</h4>
-        <p>Volume discounts that protect your margins</p>
+        <p>Manufacturer-direct pricing protects your margins. No distributor markup.</p>
       </div>
       <div class="why-card">
-        <div class="icon">🇺🇸</div>
+        <span class="icon">🇺🇸</span>
         <h4>Made in USA</h4>
-        <p>Domestic manufacturing with full traceability</p>
+        <p>Domestic manufacturing — no 15% import tariff, full traceability.</p>
       </div>
       <div class="why-card">
-        <div class="icon">📦</div>
+        <span class="icon">📦</span>
         <h4>48-Hour Shipping</h4>
-        <p>Fast fulfillment so you never run low</p>
+        <p>Fast fulfillment so you never run low on your highest-margin protocols.</p>
       </div>
       <div class="why-card">
-        <div class="icon">🔬</div>
+        <span class="icon">🔬</span>
         <h4>99.5%+ Purity</h4>
-        <p>Third-party tested — COA with every order</p>
+        <p>Third-party HPLC and mass spec tested. COA ships with every order.</p>
       </div>
       <div class="why-card">
-        <div class="icon">⚗️</div>
+        <span class="icon">⚗️</span>
         <h4>Custom Formulations</h4>
-        <p>Tailored compounds for your clinic's protocols</p>
+        <p>Tailored blends for your clinic's specific protocols and patient needs.</p>
       </div>
       <div class="why-card">
-        <div class="icon">📅</div>
-        <h4>Long Shelf Life</h4>
-        <p>Stability-tested for reliable inventory management</p>
+        <span class="icon">📅</span>
+        <h4>15-Month Shelf Life</h4>
+        <p>Room temperature stable. Less expired inventory, lower carrying costs.</p>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- The Problem with Traditional Peptides -->
-  <div class="problem-section">
-    <div class="section-title">The Problem with Traditional Peptide Products</div>
+<!-- ==================== PROBLEM ==================== -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">The Problem</div>
+      <h2>Traditional Peptide Products Are Failing Clinics</h2>
+      <p>If your supply chain runs through a compounding pharmacy, you're exposed. The FDA crackdown is accelerating — and the problems don't stop there.</p>
+    </div>
     <div class="problem-grid">
-      <div class="problem-item">
-        <span class="x">✕</span>
-        <span>Reconstitution errors and staff training burden</span>
-      </div>
-      <div class="problem-item">
-        <span class="x">✕</span>
-        <span>Cold chain logistics and refrigeration costs</span>
-      </div>
-      <div class="problem-item">
-        <span class="x">✕</span>
-        <span>Short shelf life leads to expired, wasted inventory</span>
-      </div>
-      <div class="problem-item">
-        <span class="x">✕</span>
-        <span>Fragile molecules degrade with light, heat, or movement</span>
-      </div>
-      <div class="problem-item">
-        <span class="x">✕</span>
-        <span>Titration adds time and dosing risk</span>
-      </div>
-      <div class="problem-item">
-        <span class="x">✕</span>
-        <span>Middleman markup from distributors, not manufacturers</span>
-      </div>
+      <div class="problem-item"><span class="x">✕</span><span>Reconstitution errors and staff training burden</span></div>
+      <div class="problem-item"><span class="x">✕</span><span>Cold chain logistics and refrigeration overhead</span></div>
+      <div class="problem-item"><span class="x">✕</span><span>Short shelf life leads to expired, wasted inventory</span></div>
+      <div class="problem-item"><span class="x">✕</span><span>Fragile molecules degrade with light, heat, or movement</span></div>
+      <div class="problem-item"><span class="x">✕</span><span>Titration adds time and introduces dosing risk</span></div>
+      <div class="problem-item"><span class="x">✕</span><span>Compounding pharmacy shutdowns can cut your supply overnight</span></div>
     </div>
   </div>
+</section>
 
-  <!-- Product Advantages — Proprietary Inclusion Complex -->
-  <div class="advantages-section">
-    <div class="section-title">Product Advantages — Proprietary Inclusion Complex</div>
+<!-- ==================== INCLUSION COMPLEX ==================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Proprietary Technology</div>
+      <h2>The Inclusion Complex Advantage</h2>
+      <p>Our cyclodextrin-based inclusion complex encapsulates peptides at the molecular level — delivering vials that arrive pre-reconstituted, stable, and ready to administer.</p>
+    </div>
     <div class="advantage-grid">
       <div class="advantage-item">
         <span class="adv-icon">💧</span>
         <div>
           <h4>Pre-Reconstituted</h4>
-          <p>No bacteriostatic water needed. Every vial arrives ready to administer.</p>
+          <p>No bacteriostatic water, no mixing, no math. Every vial arrives ready to administer straight from the box.</p>
         </div>
       </div>
       <div class="advantage-item">
         <span class="adv-icon">📅</span>
         <div>
           <h4>15-Month Shelf Life</h4>
-          <p>Refrigerated or room temperature — same stability, same potency.</p>
-        </div>
-      </div>
-      <div class="advantage-item">
-        <span class="adv-icon">🔬</span>
-        <div>
-          <h4>Molecular Stability</h4>
-          <p>Withstands shaking, drops, and shipping without degradation.</p>
+          <p>Stability-tested at room temperature. Stock confidently without watching expiration dates.</p>
         </div>
       </div>
       <div class="advantage-item">
         <span class="adv-icon">❄️</span>
         <div>
           <h4>No Cold Chain Required</h4>
-          <p>Zero degradation outside refrigeration. Ship and store anywhere.</p>
+          <p>Ship anywhere, any season. No ice packs, no insulated packaging, no refrigerator space.</p>
         </div>
       </div>
       <div class="advantage-item">
         <span class="adv-icon">☀️</span>
         <div>
           <h4>Not Light-Sensitive</h4>
-          <p>No amber vials or special storage protocols necessary.</p>
+          <p>No amber vials, no dark storage requirements. Store on any shelf in your clinic.</p>
+        </div>
+      </div>
+      <div class="advantage-item">
+        <span class="adv-icon">🔬</span>
+        <div>
+          <h4>Molecular Stability</h4>
+          <p>The inclusion complex protects peptide bonds at the molecular level. Shake it, drop it, ship it in summer heat — stays intact and bioactive.</p>
         </div>
       </div>
       <div class="advantage-item">
         <span class="adv-icon">🎯</span>
         <div>
           <h4>No Titration Required</h4>
-          <p>Consistent, precise dosing straight from the vial every time.</p>
+          <p>Consistent, precise dosing every time. Reduces errors, simplifies training, lowers liability.</p>
         </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- Why This Matters For Your Clinic -->
-  <div class="benefits-section">
-    <div class="section-title">Why This Matters For Your Clinic</div>
+<!-- ==================== CLINIC BENEFITS ==================== -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">The Bottom Line</div>
+      <h2>What This Means For Your Practice</h2>
+    </div>
     <div class="benefits-grid">
       <div class="benefit-item">
         <span class="check">✓</span>
-        <div><strong>Eliminate Waste</strong><br><span>15-month shelf life means less expired inventory and lower carrying costs.</span></div>
+        <div>
+          <strong>Eliminate Waste</strong>
+          <span>15-month shelf life means less expired inventory and lower carrying costs on your highest-margin SKUs.</span>
+        </div>
       </div>
       <div class="benefit-item">
         <span class="check">✓</span>
-        <div><strong>Simplify Storage</strong><br><span>Room temperature storage frees refrigerator space and removes cold chain logistics.</span></div>
+        <div>
+          <strong>Simplify Storage</strong>
+          <span>No dedicated refrigerator space, no cold chain compliance. Room temperature storage is all you need.</span>
+        </div>
       </div>
       <div class="benefit-item">
         <span class="check">✓</span>
-        <div><strong>Reduce Training & Liability</strong><br><span>No reconstitution protocol. New staff can administer on day one.</span></div>
+        <div>
+          <strong>Reduce Training & Liability</strong>
+          <span>Pre-reconstituted vials mean no reconstitution protocols, no concentration calculations. New staff administer confidently on day one.</span>
+        </div>
       </div>
       <div class="benefit-item">
         <span class="check">✓</span>
-        <div><strong>Higher Margins</strong><br><span>Manufacturer-direct pricing lets you set your own margins and distribute to patients.</span></div>
+        <div>
+          <strong>Protect Your Supply Chain</strong>
+          <span>We've operated for 16+ years without a single FDA enforcement action. When compounders are shutting down, your supply keeps running.</span>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- Product Categories -->
-  <div class="categories-section">
-    <div class="section-title">Product Categories</div>
-    <div class="cat-row">
-      <div class="cat-name">Weight Loss</div>
-      <div class="cat-compounds">Retatrutide, Tirzepatide, Semaglutide, Burn Blend</div>
-      <div class="cat-app">Medical weight management programs</div>
-      <span class="cat-tag">HIGH DEMAND</span>
+<!-- ==================== PRODUCT CATEGORIES ==================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Product Overview</div>
+      <h2>What We Manufacture</h2>
+      <p>All products manufactured in-house under cGMP standards with 99.5%+ verified purity. Full price list below.</p>
     </div>
-    <div class="cat-row">
-      <div class="cat-name">GH Peptides</div>
-      <div class="cat-compounds">Sermorelin, Ipamorelin, CJC-1295, Tesamorelin, IGF1-LR3</div>
-      <div class="cat-app">Growth hormone stimulation, anti-aging, body composition</div>
-    </div>
-    <div class="cat-row">
-      <div class="cat-name">Healing & Repair</div>
-      <div class="cat-compounds">BPC-157, TB-500, Wolverine, BPC Mod, LL-37</div>
-      <div class="cat-app">Tissue repair, sports recovery, joint health</div>
-    </div>
-    <div class="cat-row">
-      <div class="cat-name">Longevity</div>
-      <div class="cat-compounds">NAD+, Epithalon, SS-31, Curcumin, Quercetin, Resveratrol</div>
-      <div class="cat-app">Cellular repair, telomere support, mitochondria</div>
-    </div>
-    <div class="cat-row">
-      <div class="cat-name">Immune Support</div>
-      <div class="cat-compounds">Thymosin Alpha-1, TA1 Mod</div>
-      <div class="cat-app">Immune modulation, thymic peptide protocols</div>
-    </div>
-    <div class="cat-row">
-      <div class="cat-name">Cognitive</div>
-      <div class="cat-compounds">Semax, Selank, BDNF, Dihexa, 5-Amino</div>
-      <div class="cat-app">Neuroprotection, focus, stress management</div>
-    </div>
-    <div class="cat-row">
-      <div class="cat-name">Sexual Health</div>
-      <div class="cat-compounds">PT-141, Kisspeptin, Oxytocin</div>
-      <div class="cat-app">Libido, hormonal signaling, bonding protocols</div>
-    </div>
-    <div class="cat-row">
-      <div class="cat-name">Topical & Skin</div>
-      <div class="cat-compounds">GHK-Cu Topical, GHK-Cu Injectable, Melanotan 2</div>
-      <div class="cat-app">Anti-aging, skin rejuvenation, hair restoration</div>
-    </div>
-    <div class="cat-row">
-      <div class="cat-name">IV Injectables</div>
-      <div class="cat-compounds">Glutathione, B-12, Lipo Mino B, MIC Complex</div>
-      <div class="cat-app">IV infusion protocols, drip therapy, clinic use</div>
-    </div>
-  </div>
+    <div class="cat-row"><div class="cat-name">Weight Loss</div><div class="cat-compounds">Retatrutide · Tirzepatide · Semaglutide · Burn Blend</div><div class="cat-app">Medical weight management programs</div><span class="cat-tag">HIGH DEMAND</span></div>
+    <div class="cat-row"><div class="cat-name">GH Peptides</div><div class="cat-compounds">Sermorelin · Ipamorelin · CJC-1295 · Tesamorelin · IGF1-LR3</div><div class="cat-app">GH stimulation, anti-aging, body composition</div></div>
+    <div class="cat-row"><div class="cat-name">Healing & Repair</div><div class="cat-compounds">BPC-157 · TB-500 · Wolverine · BPC Mod · LL-37</div><div class="cat-app">Tissue repair, sports recovery, joint health</div></div>
+    <div class="cat-row"><div class="cat-name">Longevity</div><div class="cat-compounds">NAD+ · Epithalon · SS-31 · Curcumin · Quercetin</div><div class="cat-app">Cellular repair, telomere support, mitochondria</div></div>
+    <div class="cat-row"><div class="cat-name">Cognitive</div><div class="cat-compounds">Semax · Selank · BDNF · Dihexa · 5-Amino</div><div class="cat-app">Neuroprotection, focus, stress management</div></div>
+    <div class="cat-row"><div class="cat-name">Sexual Health</div><div class="cat-compounds">PT-141 · Kisspeptin · Oxytocin</div><div class="cat-app">Libido, hormonal signaling, bonding protocols</div></div>
+    <div class="cat-row"><div class="cat-name">Immune Support</div><div class="cat-compounds">Thymosin Alpha-1 · TA1 Mod</div><div class="cat-app">Immune modulation, thymic peptide protocols</div></div>
+    <div class="cat-row"><div class="cat-name">Topical & Skin</div><div class="cat-compounds">GHK-Cu Topical · GHK-Cu Injectable · Melanotan 2</div><div class="cat-app">Anti-aging, skin rejuvenation, hair restoration</div></div>
+    <div class="cat-row"><div class="cat-name">IV Injectables</div><div class="cat-compounds">Glutathione · B-12 · Lipo Mino B · MIC Complex</div><div class="cat-app">IV infusion protocols, drip therapy</div></div>
 
-  <!-- Who We Serve -->
-  <div class="serve-section">
-    <div class="section-title">Who We Serve</div>
-    <div class="serve-tags">
-      <div class="serve-tag">Med Spas</div>
-      <div class="serve-tag">Anti-Aging Clinics</div>
-      <div class="serve-tag">Sports Medicine</div>
-      <div class="serve-tag">Weight Loss Clinics</div>
-      <div class="serve-tag">Wellness Centers</div>
-      <div class="serve-tag">Regenerative Medicine</div>
-      <div class="serve-tag">Functional Medicine</div>
-    </div>
-  </div>
-
-  <!-- Product Catalog Table -->
-  <div class="section">
-    <div class="section-title">Wholesale Price List</div>
-    <p style="font-size:12px; color:#667788; margin-bottom:16px;">Minimum order: 100 units per product. Volume discounts available — pricing decreases with quantity.</p>
-
-    <table class="product-table">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Details</th>
-          <th>Per Unit</th>
-        </tr>
-      </thead>
-      <tbody>
-
-        <tr class="category-row"><td colspan="3">🔥 Weight Loss & Metabolic</td></tr>
-        <tr class="highlight-row">
-          <td>Burn Blend <span class="tag tag-hot">HOT</span></td>
-          <td>Reta 15mg / Tirz 5mg</td>
-          <td>$185</td>
-        </tr>
-        <tr><td>Retatrutide</td><td>18mg</td><td>$185</td></tr>
-        <tr><td>Tirzepatide</td><td>20mg</td><td>$185</td></tr>
-        <tr><td>Tirzepatide</td><td>10mg</td><td>$118</td></tr>
-        <tr><td>Semaglutide</td><td>10mg</td><td>$118</td></tr>
-        <tr><td>MOTS-C</td><td>10mg — mitochondrial peptide</td><td>$91</td></tr>
-        <tr><td>AOD + Adipotide</td><td>Fat loss peptide blend</td><td>$82</td></tr>
-
-        <tr class="category-row"><td colspan="3">💪 GH Peptides & Growth Factors</td></tr>
-        <tr><td>Sermorelin</td><td>10mg</td><td>$99</td></tr>
-        <tr><td>Ipamorelin</td><td>10mg</td><td>$80</td></tr>
-        <tr><td>Tesamorelin</td><td>10mg</td><td>$99</td></tr>
-        <tr><td>CJC-1295 w/DAC</td><td>5mg</td><td>$80</td></tr>
-        <tr><td>CJC-1295</td><td>5mg (no DAC)</td><td>$77</td></tr>
-        <tr><td>IGF1-LR3</td><td>Injectable</td><td>$95</td></tr>
-        <tr><td>Follistatin (FST-344)</td><td>1mg</td><td>$170</td></tr>
-        <tr><td>2X Blend</td><td>Tesa/Ipa 5/5mg OR CJC/Ipa 5/5mg</td><td>$85</td></tr>
-        <tr><td>3X Blend</td><td>Tesa 5mg / MGF 500mcg / Ipamorelin 2.5mg</td><td>$85</td></tr>
-        <tr><td>4X Blend</td><td>G2 1.6mg / Ipa 1.2mg / Tesa 1.6mg / P-MGF 1mg</td><td>$85</td></tr>
-
-        <tr class="category-row"><td colspan="3">🩹 Healing & Repair</td></tr>
-        <tr><td>BPC-157</td><td>10mg</td><td>$80</td></tr>
-        <tr><td>BPC-157</td><td>20mg</td><td>$110</td></tr>
-        <tr class="highlight-row">
-          <td>Wolverine <span class="tag tag-popular">POPULAR</span></td>
-          <td>BPC-157 10mg / Thymosin Beta-4 10mg</td>
-          <td>$105</td>
-        </tr>
-        <tr><td>BPC Mod</td><td>BPC-157 10mg / TB4 2.5mg / KPV 2mg / P-MGF 1mg</td><td>$135</td></tr>
-        <tr><td>Glow</td><td>GHK 50mg / BPC 10mg / TB4 10mg</td><td>$130</td></tr>
-        <tr><td>Klow</td><td>GHK 50mg / BPC 10mg / TB4 10mg / KPV 10mg</td><td>$145</td></tr>
-        <tr><td>Thymosin Beta-4</td><td>10mg</td><td>$99</td></tr>
-        <tr><td>KPV</td><td>10mg</td><td>$85</td></tr>
-        <tr><td>LL-37</td><td>2.5mg / 250mg / 250mg</td><td>$135</td></tr>
-        <tr><td>GI Mod</td><td>Gastrointestinal support blend</td><td>$85</td></tr>
-
-        <tr class="category-row"><td colspan="3">🧬 Longevity & Anti-Aging</td></tr>
-        <tr><td>NAD+</td><td>1000mg</td><td>$120</td></tr>
-        <tr><td>Epithalon</td><td>50mg — telomere support</td><td>$120</td></tr>
-        <tr><td>SS-31</td><td>50mg / 5mg per 1ml</td><td>$250</td></tr>
-        <tr><td>Melanotan 2</td><td>10mg</td><td>$70</td></tr>
-        <tr><td>Curcumin</td><td>600mg</td><td>$134</td></tr>
-        <tr><td>Quercetin</td><td>Anti-inflammatory / antioxidant</td><td>$134</td></tr>
-        <tr><td>Resveratrol</td><td>Anti-aging / cellular longevity</td><td>$134</td></tr>
-
-        <tr class="category-row"><td colspan="3">🛡️ Immune & Thymic Support</td></tr>
-        <tr><td>Thymosin Alpha-1 <span class="tag tag-moq">MOQ 75</span></td><td>5mg</td><td>$85</td></tr>
-        <tr><td>Thymosin Alpha-1 Mod</td><td>TA1 3.2mg / Thymalin 2.5mg / Ursolic Acid 5mg / RG3 Ginsenoside 25mg / AMPK</td><td>$135</td></tr>
-
-        <tr class="category-row"><td colspan="3">🧠 Cognitive & Neuroprotection</td></tr>
-        <tr><td>BDNF</td><td>10mg — brain-derived neurotrophic factor</td><td>$104</td></tr>
-        <tr><td>Semax</td><td>20mg</td><td>$90</td></tr>
-        <tr><td>Selank</td><td>20mg</td><td>$90</td></tr>
-        <tr><td>Dihexa (Injectable)</td><td>8mg</td><td>$95</td></tr>
-        <tr><td>5-Amino / SLU-PP</td><td>30 tabs / 50mg / 1mg</td><td>$127</td></tr>
-
-        <tr class="category-row"><td colspan="3">❤️ Sexual Health & Hormonal</td></tr>
-        <tr><td>PT-141</td><td>10mg — bremelanotide</td><td>$70</td></tr>
-        <tr><td>Kisspeptin</td><td>5mg</td><td>$95</td></tr>
-        <tr><td>Oxytocin</td><td>10mg</td><td>$95</td></tr>
-
-        <tr class="category-row"><td colspan="3">✨ Topical & Skin</td></tr>
-        <tr><td>Topical GHK-Cu</td><td>15ml — copper peptide serum</td><td>$150</td></tr>
-        <tr><td>Topical GHK-Cu</td><td>30ml — copper peptide serum</td><td>$250</td></tr>
-        <tr><td>GHK-Cu (Injectable)</td><td>50mg</td><td>$87</td></tr>
-
-        <tr class="category-row"><td colspan="3">💉 IV-Grade Injectables</td></tr>
-        <tr><td>Glutathione (IV Grade) <span class="tag tag-moq">MOQ 100</span></td><td>30ml / 200mg per ml</td><td>$110</td></tr>
-        <tr><td>B-12 (IV Grade) <span class="tag tag-moq">MOQ 100</span></td><td>30ml / 10mg per 1ml</td><td>$120</td></tr>
-        <tr><td>Lipo Mino B (IV Grade)</td><td>30ml</td><td>$129</td></tr>
-        <tr><td>Injectable 5-Amino 1MQ</td><td>50mg</td><td>$110</td></tr>
-        <tr><td>MIC Complex</td><td>Methionine, Inositol & Alpha GPC — 100mL Vial</td><td>$229</td></tr>
-
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Sample Program -->
-  <div class="benefits-section">
-    <div class="section-title">🧪 Sample Program — Try Before You Commit</div>
-    <p style="font-size:13px; color:#8899aa; line-height:1.7; margin-bottom:16px;">
-      Not ready for a full order? Try <strong style="color:#fff;">10 units of any product</strong> to test quality, patient response, and fit — no long-term commitment required.
-    </p>
-    <div class="benefits-grid">
-      <div class="benefit-item">
-        <span class="check">✓</span>
-        <div><strong>10-Unit Minimum</strong><br><span>Sample any product with just 10 units — no bulk commitment.</span></div>
-      </div>
-      <div class="benefit-item">
-        <span class="check">✓</span>
-        <div><strong>Full COA Included</strong><br><span>Same third-party tested product as wholesale orders.</span></div>
-      </div>
-      <div class="benefit-item">
-        <span class="check">✓</span>
-        <div><strong>Credit Toward Bulk</strong><br><span>Your sample cost applies to your first wholesale order.</span></div>
-      </div>
-      <div class="benefit-item">
-        <span class="check">✓</span>
-        <div><strong>Get Sample Pricing</strong><br><span>Email <a href="mailto:sales@clearmeds.bio?subject=Sample%20Order%20Request" style="color:#00e5ff; text-decoration:none;">sales@clearmeds.bio</a> or call <a href="tel:+17132809876" style="color:#00e5ff; text-decoration:none;">(713) 280-9876</a></span></div>
+    <div style="margin-top: 32px;">
+      <div class="section-label" style="margin-bottom: 12px;">Who We Serve</div>
+      <div class="serve-tags">
+        <div class="serve-tag">Med Spas</div>
+        <div class="serve-tag">Anti-Aging Clinics</div>
+        <div class="serve-tag">Sports Medicine</div>
+        <div class="serve-tag">Weight Loss Clinics</div>
+        <div class="serve-tag">Wellness Centers</div>
+        <div class="serve-tag">Regenerative Medicine</div>
+        <div class="serve-tag">Functional Medicine</div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- Ordering Info -->
-  <div class="notes">
-    <h3>Ordering Information</h3>
-    <ul>
-      <li><strong>Minimum order: 100 units per product</strong> — pricing decreases with higher volume.</li>
+<!-- ==================== PRICE TABLE ==================== -->
+<section class="section section-alt" id="prices">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Wholesale Pricing</div>
+      <h2>Full Price List</h2>
+      <p>All pricing is per unit at 100-unit minimum. Volume discounts available — pricing decreases with quantity. Contact us for tiered pricing.</p>
+    </div>
+
+    <div class="sample-highlight">
+      <h3>🧪 Sample Program — Try Before You Commit</h3>
+      <p>Not ready for a full order? Try <strong>10 units of any product</strong> to test quality and patient response. Sample cost is credited toward your first bulk order. Email <a href="mailto:sales@clearmeds.bio" style="color:var(--green)">sales@clearmeds.bio</a> or call <a href="tel:+17132809876" style="color:var(--green)">(713) 280-9876</a> to get started.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Details</th>
+            <th>Per Unit</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr class="category-row"><td colspan="3">🔥 Weight Loss & Metabolic</td></tr>
+          <tr class="highlight-row">
+            <td>Burn Blend <span class="tag tag-hot">HOT</span></td>
+            <td>Reta 15mg / Tirz 5mg</td>
+            <td>$185</td>
+          </tr>
+          <tr><td>Retatrutide</td><td>18mg</td><td>$185</td></tr>
+          <tr><td>Tirzepatide</td><td>20mg</td><td>$185</td></tr>
+          <tr><td>Tirzepatide</td><td>10mg</td><td>$118</td></tr>
+          <tr><td>Semaglutide</td><td>10mg</td><td>$118</td></tr>
+          <tr><td>MOTS-C</td><td>10mg — mitochondrial peptide</td><td>$91</td></tr>
+          <tr><td>AOD + Adipotide</td><td>Fat loss peptide blend</td><td>$82</td></tr>
+
+          <tr class="category-row"><td colspan="3">💪 GH Peptides & Growth Factors</td></tr>
+          <tr><td>Sermorelin</td><td>10mg</td><td>$99</td></tr>
+          <tr><td>Ipamorelin</td><td>10mg</td><td>$80</td></tr>
+          <tr><td>Tesamorelin</td><td>10mg</td><td>$99</td></tr>
+          <tr><td>CJC-1295 w/DAC</td><td>5mg</td><td>$80</td></tr>
+          <tr><td>CJC-1295</td><td>5mg (no DAC)</td><td>$77</td></tr>
+          <tr><td>IGF1-LR3</td><td>Injectable</td><td>$95</td></tr>
+          <tr><td>Follistatin (FST-344)</td><td>1mg</td><td>$170</td></tr>
+          <tr><td>2X Blend</td><td>Tesa/Ipa 5/5mg or CJC/Ipa 5/5mg</td><td>$85</td></tr>
+          <tr><td>3X Blend</td><td>Tesa 5mg / MGF 500mcg / Ipa 2.5mg</td><td>$85</td></tr>
+          <tr><td>4X Blend</td><td>G2 1.6mg / Ipa 1.2mg / Tesa 1.6mg / P-MGF 1mg</td><td>$85</td></tr>
+
+          <tr class="category-row"><td colspan="3">🩹 Healing & Repair</td></tr>
+          <tr><td>BPC-157</td><td>10mg</td><td>$80</td></tr>
+          <tr><td>BPC-157</td><td>20mg</td><td>$110</td></tr>
+          <tr class="highlight-row">
+            <td>Wolverine <span class="tag tag-popular">POPULAR</span></td>
+            <td>BPC-157 10mg / Thymosin Beta-4 10mg</td>
+            <td>$105</td>
+          </tr>
+          <tr><td>BPC Mod</td><td>BPC-157 10mg / TB4 2.5mg / KPV 2mg / P-MGF 1mg</td><td>$135</td></tr>
+          <tr><td>Glow</td><td>GHK 50mg / BPC 10mg / TB4 10mg</td><td>$130</td></tr>
+          <tr><td>Klow</td><td>GHK 50mg / BPC 10mg / TB4 10mg / KPV 10mg</td><td>$145</td></tr>
+          <tr><td>Thymosin Beta-4</td><td>10mg</td><td>$99</td></tr>
+          <tr><td>KPV</td><td>10mg</td><td>$85</td></tr>
+          <tr><td>LL-37</td><td>2.5mg / 250mg / 250mg</td><td>$135</td></tr>
+          <tr><td>GI Mod</td><td>Gastrointestinal support blend</td><td>$85</td></tr>
+
+          <tr class="category-row"><td colspan="3">🧬 Longevity & Anti-Aging</td></tr>
+          <tr><td>NAD+</td><td>1000mg</td><td>$120</td></tr>
+          <tr><td>Epithalon</td><td>50mg — telomere support</td><td>$120</td></tr>
+          <tr><td>SS-31</td><td>50mg / 5mg per 1ml</td><td>$250</td></tr>
+          <tr><td>Melanotan 2</td><td>10mg</td><td>$70</td></tr>
+          <tr><td>Curcumin</td><td>600mg</td><td>$134</td></tr>
+          <tr><td>Quercetin</td><td>Anti-inflammatory / antioxidant</td><td>$134</td></tr>
+          <tr><td>Resveratrol</td><td>Anti-aging / cellular longevity</td><td>$134</td></tr>
+
+          <tr class="category-row"><td colspan="3">🛡️ Immune & Thymic Support</td></tr>
+          <tr><td>Thymosin Alpha-1 <span class="tag tag-moq">MOQ 75</span></td><td>5mg</td><td>$85</td></tr>
+          <tr><td>Thymosin Alpha-1 Mod</td><td>TA1 3.2mg / Thymalin 2.5mg / Ursolic Acid 5mg / RG3 Ginsenoside 25mg / AMPK</td><td>$135</td></tr>
+
+          <tr class="category-row"><td colspan="3">🧠 Cognitive & Neuroprotection</td></tr>
+          <tr><td>BDNF</td><td>10mg — brain-derived neurotrophic factor</td><td>$104</td></tr>
+          <tr><td>Semax</td><td>20mg</td><td>$90</td></tr>
+          <tr><td>Selank</td><td>20mg</td><td>$90</td></tr>
+          <tr><td>Dihexa (Injectable)</td><td>8mg</td><td>$95</td></tr>
+          <tr><td>5-Amino / SLU-PP</td><td>30 tabs / 50mg / 1mg</td><td>$127</td></tr>
+
+          <tr class="category-row"><td colspan="3">❤️ Sexual Health & Hormonal</td></tr>
+          <tr><td>PT-141</td><td>10mg — bremelanotide</td><td>$70</td></tr>
+          <tr><td>Kisspeptin</td><td>5mg</td><td>$95</td></tr>
+          <tr><td>Oxytocin</td><td>10mg</td><td>$95</td></tr>
+
+          <tr class="category-row"><td colspan="3">✨ Topical & Skin</td></tr>
+          <tr><td>Topical GHK-Cu</td><td>15ml — copper peptide serum</td><td>$150</td></tr>
+          <tr><td>Topical GHK-Cu</td><td>30ml — copper peptide serum</td><td>$250</td></tr>
+          <tr><td>GHK-Cu (Injectable)</td><td>50mg</td><td>$87</td></tr>
+
+          <tr class="category-row"><td colspan="3">💉 IV-Grade Injectables</td></tr>
+          <tr><td>Glutathione (IV Grade) <span class="tag tag-moq">MOQ 100</span></td><td>30ml / 200mg per ml</td><td>$110</td></tr>
+          <tr><td>B-12 (IV Grade) <span class="tag tag-moq">MOQ 100</span></td><td>30ml / 10mg per 1ml</td><td>$120</td></tr>
+          <tr><td>Lipo Mino B (IV Grade)</td><td>30ml</td><td>$129</td></tr>
+          <tr><td>Injectable 5-Amino 1MQ</td><td>50mg</td><td>$110</td></tr>
+          <tr><td>MIC Complex</td><td>Methionine, Inositol & Alpha GPC — 100mL Vial</td><td>$229</td></tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ORDERING INFO ==================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">How to Order</div>
+      <h2>Ordering Information</h2>
+    </div>
+    <ul class="notes-list">
+      <li><strong>Minimum order: 100 units per product</strong> — pricing decreases with higher volume. Contact us for tiered pricing.</li>
       <li><strong>Sample orders: 10 units per product</strong> — sample cost credited toward your first bulk order.</li>
-      <li><strong>Volume discounts available</strong> — the more you order, the more you save. Contact us for tiered pricing.</li>
-      <li><strong>COA included</strong> — Certificate of Analysis ships with every order.</li>
-      <li><strong>Custom formulations</strong> — tailored blends for your clinic's specific protocols.</li>
-      <li><strong>48-hour shipping</strong> — orders ship within 2 business days.</li>
-      <li><strong>No cold chain needed</strong> — ships standard ground at any temperature.</li>
+      <li><strong>Volume discounts available</strong> — the more you order, the more you save.</li>
+      <li><strong>COA included</strong> — Certificate of Analysis ships with every order. Third-party HPLC and mass spectrometry verified.</li>
+      <li><strong>Custom formulations</strong> — tailored blends for your clinic's specific protocols available on request.</li>
+      <li><strong>48-hour shipping</strong> — orders ship within 2 business days via standard ground. No cold chain required.</li>
+      <li><strong>Facility visits available</strong> — for qualifying bulk partnerships, complimentary visits to our cGMP facility in California including airfare.</li>
     </ul>
   </div>
+</section>
 
-  <!-- CTA Banner -->
-  <div class="cta-banner">
-    <h3>Ready to Stock Your Clinic?</h3>
-    <p>Wholesale pricing from the manufacturer. Add your margins. Request pricing and samples today.</p>
-    <a href="mailto:sales@clearmeds.bio?subject=Wholesale%20Pricing%20Request" class="cta-btn">Get Pricing</a>
-  </div>
-
-  <!-- Footer -->
-  <div class="footer">
-    <div class="contact-name">Chayse Winter</div>
-    <div class="contact-title">VP, Business Development — ClearMedsCorp</div>
-    <div class="contact-info">
-      📞 <a href="tel:+17132809876">(713) 280-9876</a><br>
-      ✉️ <a href="mailto:sales@clearmeds.bio">sales@clearmeds.bio</a>
-    </div>
-    <div class="website">
-      <a href="https://www.clearmeds.bio">www.clearmeds.bio</a>
-    </div>
-    <div class="disclaimer">
-      For licensed healthcare practitioners and authorized purchasers only. All products are for clinical use under appropriate medical supervision. Pricing subject to change. Volume discounts available upon request. © 2026 ClearMedsCorp, a division of August Aisles LLC.
-    </div>
-  </div>
-
+<!-- ==================== CTA BANNER ==================== -->
+<div class="cta-banner">
+  <h3>Ready to Secure Your Supply?</h3>
+  <p>Licensed manufacturer. Uninterrupted supply. Wholesale pricing direct to your clinic.</p>
+  <a href="mailto:sales@clearmeds.bio?subject=Wholesale%20Pricing%20Request" class="btn-primary">Get Pricing →</a>
 </div>
+
+<!-- ==================== CONTACT STRIP ==================== -->
+<div class="contact-strip">
+  <div class="contact-name">Chayse Winter</div>
+  <div class="contact-title">VP, Business Development — ClearMedsCorp</div>
+  <div class="contact-details">
+    📞 <a href="tel:+17132809876">(713) 280-9876</a> &nbsp;·&nbsp;
+    ✉️ <a href="mailto:sales@clearmeds.bio">sales@clearmeds.bio</a> &nbsp;·&nbsp;
+    🌐 <a href="https://www.clearmeds.bio">clearmeds.bio</a>
+  </div>
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-company">ClearMedsCorp</div>
+  <div class="footer-division">A division of August Aisles LLC</div>
+  <div class="footer-disclaimer">
+    For licensed healthcare practitioners and authorized purchasers only. All products are for clinical use under appropriate medical supervision. Pricing subject to change. Volume discounts available upon request. © 2026 ClearMedsCorp, a division of August Aisles LLC. All rights reserved.
+  </div>
+  <div class="footer-links">
+    <a href="/privacy/">Privacy Policy</a>
+    <a href="/terms/">Terms of Service</a>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// Intersection observer animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = 1;
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.why-card, .advantage-item, .benefit-item, .problem-item').forEach(el => {
+  el.style.opacity = 0;
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity .5s, transform .5s';
+  observer.observe(el);
+});
+</script>
+
 </body>
 </html>
